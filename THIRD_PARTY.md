@@ -55,3 +55,6 @@ respective owners. No ownership of those names or endorsement is claimed.
 The credits and compatibility notes here don't give anyone the right to
 redistribute other companies' source, firmware, fonts, presets or other assets.
 
+This repository contains documentation, host previews and the reusable synthesis
+core. The linked native source has its own component notices. No installable
+plugin, stock firmware image or extracted font data is distributed here.
