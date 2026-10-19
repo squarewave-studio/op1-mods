@@ -11,10 +11,9 @@ No op1r source, SDK headers or GPL host adapters are included here.
 The [native GIN source](https://github.com/joseph-holland/op1r-src/tree/ec5d6f722df05b77f80706db239352992937f4d7/synth_sdk/experimental/gin/standalone) is maintained separately
 in the op1r fork, with its GPL terms and additional firmware permission.
 
-The shared Drum Synth API, loader and native adapters belong in the separate
-op1r contribution. If a distributed plugin contains or derives from GPL code,
-its corresponding source and licence must reflect that. Keeping the reusable
-synthesis core under MIT does not make the combined binary MIT-only.
+The Drum Synth API, loader and native adapters are part of a separate op1r
+contribution. A plugin built with GPL code is covered by the GPL, even though
+the synthesis core here is MIT.
 
 ## libpo32
 
@@ -28,8 +27,7 @@ GIN's current factory bank adapts eight of
 [CNTR RNDM's free PO-32 kits](https://youtube.com/playlist?list=PLlkIAiu0_jPw3DgmZm1RbmFe86rzuWU2o).
 The original sounds are CNTR RNDM's; the 24-key layout and additional variations
 are GIN adaptations. The published [Free808 kit description](https://www.youtube.com/watch?v=NCpdgl2XTQg)
-says the creator's samples and kits are copyright free. We retain the source
-records and creator credit. Factory-kit data is supplied in the linked native source, with per-kit
+says the creator's samples and kits are copyright free. Factory-kit data is supplied in the linked native source, with per-kit
 source links and the creator's published permission statement. This repository's
 MIT core contains no factory-kit data. No endorsement is claimed.
 
@@ -54,7 +52,6 @@ names and trademarks of NuEdge Development AB. They are used only to identify
 compatible devices, software and formats. All trademarks belong to their
 respective owners. No ownership of those names or endorsement is claimed.
 
-Code, content and trademark rights are separate. A compatibility statement,
-credit or disclaimer does not grant permission to redistribute proprietary
-source, firmware, fonts, presets or other assets.
+The credits and compatibility notes here don't give anyone the right to
+redistribute other companies' source, firmware, fonts, presets or other assets.
 

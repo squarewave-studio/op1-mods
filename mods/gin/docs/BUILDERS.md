@@ -32,15 +32,16 @@ and GCC 8.5.0 and has a relative Makefile. Build inputs derived from stock #246
 are generated from the builder's own firmware archive. No firmware image,
 extracted font data or original instruction prefixes are distributed.
 
-The source rebuild was checked with the existing pinned compiler. A fresh
-download and build of that compiler has not been tested.
+I've checked the source rebuild with the pinned compiler already installed, but
+not with a freshly downloaded build of that compiler.
 
 ## Integrate With A Host
 
 The native source documents the 21 hook sites, original continuations, callback
 ABI, memory ranges and preset/save lifecycle. GIN shares code/BSS ranges and
 several hooks with op1r. Combined firmware needs one linker layout and shared
-dispatchers at those sites. Do not append the standalone payload unchanged.
+dispatchers at those sites, so appending the standalone payload unchanged won't
+work.
 
 | Host | Status |
 | --- | --- |
@@ -51,8 +52,8 @@ dispatchers at those sites. Do not append the standalone payload unchanged.
 
 Drum+ is the sample-based DrumSampler extension. GIN is a DBox-family drum
 synthesiser and needs its own host routing. The experimental Drum Synth API
-is a separate path towards `gin.op1p`; this source release is not a loadable
-plugin and does not claim upstream acceptance.
+is a separate path towards `gin.op1p`. This source release isn't a loadable
+plugin, and it hasn't been accepted upstream.
 
 ## Credits
 

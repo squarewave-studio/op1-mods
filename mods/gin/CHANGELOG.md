@@ -5,17 +5,18 @@
 GIN for the original OP-1 #246: 24-key kits, four synthesis voices, per-sound
 A/B morphing, the full Advanced editor and individual sound names.
 
-The accepted build includes eight factory kits adapted from CNTR RNDM's PO-32
-kits, with creator credit retained. Working-slot edits survive restart, while
-holding a snapshot button creates a separate named preset.
+It comes with eight factory kits adapted from CNTR RNDM's PO-32 kits, with
+creator credit. Working-slot edits survive restart, and holding a snapshot
+button saves a separate named preset.
 
-The final save correction avoids a temporary database journal that the stock
-filesystem cannot open. Earlier test candidates with the save crash are withdrawn.
+Saving no longer crashes: GIN now avoids a temporary database journal that the
+stock filesystem can't open. If you tried an earlier test build, please use this
+one instead.
 
-Known limitation: extreme combined load can still cause audio breakup. The
-four-voice limit is retained. OP1P support and combined op1r integration are not
-part of the standalone hardware acceptance.
+Known limitation: very heavy combined load can still cause audio breakup, so
+GIN stays at four voices. OP1P support and op1r integration aren't part of this
+release.
 
 The source release includes the reusable synthesis core and links to the
 complete native integration, factory kit data and build instructions.
-A loadable OP1P file is not part of this release.
+A loadable OP1P file isn't part of this release.
