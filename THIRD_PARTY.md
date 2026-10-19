@@ -58,3 +58,6 @@ Code, content and trademark rights are separate. A compatibility statement,
 credit or disclaimer does not grant permission to redistribute proprietary
 source, firmware, fonts, presets or other assets.
 
+This repository contains documentation, host previews and the reusable synthesis
+core. The linked native source has its own component notices. No installable
+plugin, stock firmware image or extracted font data is distributed here.
