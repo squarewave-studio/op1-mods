@@ -1,0 +1,12 @@
+build/
+out/
+.work/
+.private/
+__pycache__/
+.DS_Store
+*.op1
+*.op1p
+*.elf
+*.o
+
+mods/gin/core/out/

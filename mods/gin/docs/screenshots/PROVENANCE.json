@@ -1,0 +1,30 @@
+{
+  "scope": "Host previews, not hardware photos, emulator captures or OP1P execution",
+  "date": "2026-10-18",
+  "screens": {
+    "play.png": {
+      "sha256": "31dfd1acfe3e13c2c3afed3db80f30f82567832dc108a036bf4c83348cc650bc",
+      "origin": "GIN screen rendered on a host computer"
+    },
+    "tone-envelope.png": {
+      "sha256": "77011a19fc47983912df462c181d747533c290e3b4a2dc0115014574664945db",
+      "origin": "GIN screen rendered on a host computer"
+    },
+    "noise-filter.png": {
+      "sha256": "6bf7e9382438f4c687d9b7cc71c0bf52238f00ea432dcb88d0c89e4e1f6374a3",
+      "origin": "GIN screen rendered on a host computer"
+    },
+    "mix-and-level.png": {
+      "sha256": "039b24bdc08edc07d22dbc26364039089f970c203d784818157b173184e13052",
+      "origin": "GIN screen rendered on a host computer"
+    },
+    "name-sound.png": {
+      "sha256": "0107fd6a267fed497cc12519fc56df4f9230d878f965a89e56d0ddf1b1ad49a1",
+      "origin": "GIN screen rendered on a host computer"
+    },
+    "about.png": {
+      "sha256": "a2e27f864f20101f1e930e074a12b7be316aa070bacd42617da824a2cb569ff3",
+      "origin": "GIN screen rendered on a host computer"
+    }
+  }
+}
