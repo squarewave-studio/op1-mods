@@ -58,22 +58,3 @@ Code, content and trademark rights are separate. A compatibility statement,
 credit or disclaimer does not grant permission to redistribute proprietary
 source, firmware, fonts, presets or other assets.
 
-## Source Publication Rules
-
-Publish only original code or third-party code with documented provenance and
-redistribution terms, retaining the required copyright and licence notices.
-Do not publish Teenage Engineering or Sonic Charge proprietary source, SDKs,
-libraries, decompiled implementations or code/data copied from their binaries.
-Do not include extracted firmware bytes, lookup tables, fonts, factory content
-or private reverse-engineering material. An open-source licence on a dependency
-is not evidence that every file or table in it has an independent origin.
-
-Before any source import or plugin release, check the exact files, generated
-output, dependency content and Git history. Keep source and binary licence
-obligations explicit. User-owned Microtonic patches may be imported for personal
-use; that does not authorise bundling Sonic Charge's factory presets. Third-party
-kits require their own redistribution basis and credit.
-
-This repository contains documentation, host previews and the reusable synthesis
-core. The linked native source has its own component notices. No installable
-plugin, stock firmware image or extracted font data is distributed here.
