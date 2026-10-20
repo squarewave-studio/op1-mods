@@ -13,6 +13,7 @@ export const tokens = {
     "top": 8,
     "right": 8,
     "bottom": 16,
+    "criticalContentBottom": 140,
     "status": "proposed-default-not-measured-bezel"
   },
   "type": {
@@ -39,7 +40,7 @@ export const tokens = {
     "background": "#000000",
     "blue": "#698eff",
     "green": "#00ed95",
-    "white": "#e6e7ff",
+    "white": "#ffffff",
     "orange": "#ff423f",
     "secondary": "#b9b9c9",
     "decorative": "#625d77"
@@ -51,6 +52,7 @@ export const tokens = {
     "orange"
   ],
   "space": {
+    "layoutGrid": 8,
     "unit": 4,
     "related": 4,
     "group": 8,
@@ -58,8 +60,10 @@ export const tokens = {
   },
   "stroke": {
     "fine": 0.85,
-    "normal": 1,
-    "emphasis": 1.5
+    "normal": 1.5,
+    "emphasis": 2,
+    "alignment": "center",
+    "status": "artwork-defaults-stock-observed-not-a-renderer-minimum"
   },
   "artwork": {
     "targetBytes": 8192,
@@ -68,8 +72,8 @@ export const tokens = {
   },
   "provenance": {
     "type": "Three roles proposed by Joe; nominal primary text heights observed in public GIN source, not verified TE ink metrics or an official stock scale.",
-    "color": "GIN reference RGB values; secondary is an original library choice. Not measured TE/OLED calibration.",
-    "safeArea": "Bottom clearance responds to Joe's case/window observation and Kennel's documented 12px composition lift; 16px is a proposed starting inset."
+    "color": "stock-246-resource: four encoder entries from locally inspected colors.svg; secondary/decorative are kit choices. Static stock art has variants. Not OLED calibration.",
+    "safeArea": "Proposed 8/8/16/8 top/right/bottom/left insets; maxaw reports 147 usable units and Instant_Fidelity suggests critical content above y140. Neither is a universal measured boundary."
   },
   "layout": {
     "encoderColumnLeft": [
@@ -82,5 +86,12 @@ export const tokens = {
     "playRightAnchor": 311,
     "valueUnitGap": 4,
     "status": "proposed-reference-layout"
+  },
+  "colorProfile": {
+    "id": "stock-246-resource",
+    "firmware": "246",
+    "encoderSource": "content/display/colors.svg",
+    "sha256": "f76b8b66cbb37eb141fbb7d14d8a624e373df8a080f2d51dc769c16881f9c1e5",
+    "scope": "Four encoder entries only; secondary and decorative are kit choices, not OLED calibration."
   }
 };

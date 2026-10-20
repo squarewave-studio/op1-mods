@@ -23,13 +23,24 @@ framework may support specific matrix transforms; do not infer arbitrary group
 transform support from a browser. The checker rejects transforms conservatively,
 even where a particular SDK can safely apply a native transform at runtime.
 
-Give each newly generated filled contour its own path. Disconnected filled
-subpaths can join incorrectly in the native renderer. Keep style on the actual
+Use one subpath per path element, including stroked paths.
+[Instant_Fidelity reports](https://op-forums.com/t/custom-firmware-on-the-op-1/4283/1373)
+that later M commands can connect and large compound paths can exhaust the
+renderer’s blocks. Give each disconnected contour its own element. Keep style on the actual
 shape, preserve paint order and do not merge every contour to save bytes.
 The 8 KiB target is a community artwork budget, not the KNPL file-size limit or
 a proof of safe per-path allocation. Long compound paths can fail independently
 of total file size. The kit's path-text examples are larger; they are reference
 layouts, not optimized loadable plugin assets.
+
+[Instant_Fidelity’s hardware notes](https://op-forums.com/t/custom-firmware-on-the-op-1/4283/1373)
+also report tiny circles around radius 1–2 failing to appear, dropped zero-length
+lines and flat line ends. For functional dots, try two short crossing strokes
+with visible length and verify the result on the target. Do not erase intentional
+stock dots or globally override authored cap/join styles based on this report.
+The kit uses centred strokes: expand bounds by half the width, inset edge lines
+and measure joins and curve extremes. SVG inside/outside stroke alignment is not
+part of this conservative profile.
 
 ## Named blocks and visibility
 
@@ -95,6 +106,13 @@ memory/lifetime contract applies. It can fall back to ordinary rendering.
 It is not a generic OP-1 capability, GPU assumption or permission to preserve an
 arbitrary framebuffer. Layer interleaving can make a single prefix unsuitable.
 
+Create text objects once per document lifetime, retain their handles and keep
+a shown-string cache. Set contents only when the displayed string changes.
+Retaining an object, changing its contents and drawing it are separate costs;
+unchanged text can still rasterize. Repeated screen entry must not accumulate
+text objects, and document replacement invalidates handles. Use the matching
+SDK’s actual text service rather than assuming `op1_text_*` names are portable.
+
 Cache strings, measurements and stable geometry on changes. Do not rebuild all
 SVG nodes or draw an arbitrary UI from an audio callback/ISR. Keep updates in
 the documented graphics owner. Publish a coherent snapshot; visible values do
@@ -135,6 +153,24 @@ The workbench keeps vector curves and browser antialiasing. Its “400×200
 comparison” is a scaled logical view, **not a native 400×198 capture**. Native
 coverage, clipping, physical OLED visibility and timing need their own checks.
 There is no universal antialiasing flag established by this library.
+
+## Raster Work And Draw Order
+
+Prefer SVG for stable geometry and a bounded code layer for live content.
+[Instant_Fidelity](https://op-forums.com/t/custom-firmware-on-the-op-1/4283/1373)
+reports that their raster lines must follow `op1_screen_draw()` or the screen
+clear/draw loses them. Verify this order in the exact SDK; foreground occlusion
+may need another supported layer after the live content. Do not infer that every
+runtime exposes those function names or preserves pixels between frames.
+
+Their approximately 150 raster lines per frame is a workload heuristic, not a
+renderer limit or a guaranteed safe budget. Long thick lines, clipping, SVG
+edges and text add work. Precompute waveform peaks or patterns when their data
+changes; a short cursor or meter should not trigger a complete recomputation.
+Use Q10 coordinates where the SDK requires them (1024 units per logical pixel).
+Keep runtime arithmetic integer/fixed point where practical; preserve fractional
+geometry through fixed point rather than rounding it away. Confirm any float
+constant is folded in the target build before relying on that saving.
 
 ## Measure the right thing
 

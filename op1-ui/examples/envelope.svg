@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160"><rect x="0" y="0" width="320" height="160" fill="#000000"/>
+<path id="title-0" d="M 9,20 L 11.75,9 L 14.5,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-1" d="M 10.1,15.6 L 13.4,15.6" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-2" d="M 16.15,20 L 16.15,9 L 18.9,14.5 L 21.65,9 L 21.65,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-3" d="M 23.3,20 L 23.3,9 L 26.6,9 L 28.8,11.2 L 28.8,12.3 L 26.6,14.5 L 23.3,14.5" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-4" d="M 30.45,9 L 30.45,20 L 35.95,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-5" d="M 37.6,9 L 43.1,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-6" d="M 40.35,9 L 40.35,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-7" d="M 37.6,20 L 43.1,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-8" d="M 44.75,9 L 50.25,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-9" d="M 47.5,9 L 47.5,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-10" d="M 51.9,9 L 51.9,17.8 L 53,20 L 56.3,20 L 57.4,17.8 L 57.4,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-11" d="M 59.05,9 L 62.35,9 L 64.55,11.2 L 64.55,17.8 L 62.35,20 L 59.05,20 L 59.05,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-12" d="M 71.7,9 L 66.2,9 L 66.2,20 L 71.7,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-13" d="M 66.2,14.5 L 70.6,14.5" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-14" d="M 86,9 L 80.5,9 L 80.5,20 L 86,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-15" d="M 80.5,14.5 L 84.9,14.5" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-16" d="M 87.65,20 L 87.65,9 L 93.15,20 L 93.15,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-17" d="M 94.8,9 L 97.55,20 L 100.3,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-18" d="M 107.45,9 L 101.95,9 L 101.95,20 L 107.45,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-19" d="M 101.95,14.5 L 106.35,14.5" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-20" d="M 109.1,9 L 109.1,20 L 114.6,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-21" d="M 117.35,9 L 120.65,9 L 121.75,11.2 L 121.75,17.8 L 120.65,20 L 117.35,20 L 116.25,17.8 L 116.25,11.2 L 117.35,9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-22" d="M 123.4,20 L 123.4,9 L 126.7,9 L 128.9,11.2 L 128.9,12.3 L 126.7,14.5 L 123.4,14.5" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-23" d="M 136.05,9 L 130.55,9 L 130.55,20 L 136.05,20" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="title-24" d="M 130.55,14.5 L 134.95,14.5" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="axis" d="M 24,86 L 296,86" fill="none" stroke="#625d77" stroke-width="1"/>
+<path id="stage-0" d="M 24,86 L 72,37" fill="none" stroke="#698eff" stroke-width="1.5"/>
+<path id="stage-1" d="M 72,37 L 128,62" fill="none" stroke="#00ed95" stroke-width="1.5"/>
+<path id="stage-2" d="M 128,62 L 224,62" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+<path id="stage-3" d="M 224,62 L 296,86" fill="none" stroke="#ff423f" stroke-width="1.5"/>
+<path id="control-0-label-0" d="M 9,113 L 11.75,102 L 14.5,113" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-1" d="M 10.1,108.6 L 13.4,108.6" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-2" d="M 16.15,102 L 21.65,102" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-3" d="M 18.9,102 L 18.9,113" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-4" d="M 23.3,102 L 28.8,102" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-5" d="M 26.05,102 L 26.05,113" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-6" d="M 30.45,113 L 33.2,102 L 35.95,113" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-7" d="M 31.55,108.6 L 34.85,108.6" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-8" d="M 43.1,103.1 L 42,102 L 38.7,102 L 37.6,103.1 L 37.6,111.9 L 38.7,113 L 42,113 L 43.1,111.9" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-9" d="M 44.75,102 L 44.75,113" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-label-10" d="M 50.25,102 L 44.75,107.5 L 50.25,113" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-value-0" d="M 9.9,122.6 L 13.5,119 L 13.5,137" fill="none" stroke="#698eff" stroke-width="1"/>
+<path id="control-0-value-1" d="M 9,137 L 18,137" fill="none" stroke="#698eff" stroke-width="1"/>
+<path id="control-0-value-2" d="M 20.7,122.6 L 20.7,120.8 L 22.5,119 L 27.9,119 L 29.7,120.8 L 29.7,124.4 L 20.7,137 L 29.7,137" fill="none" stroke="#698eff" stroke-width="1"/>
+<path id="control-0-unit-0" d="M 33.7,137 L 33.7,126 L 36.45,131.5 L 39.2,126 L 39.2,137" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-0-unit-1" d="M 46.35,127.1 L 45.25,126 L 41.95,126 L 40.85,127.1 L 40.85,130.4 L 41.95,131.5 L 45.25,131.5 L 46.35,132.6 L 46.35,135.9 L 45.25,137 L 41.95,137 L 40.85,135.9" fill="none" stroke="#698eff" stroke-width="0.85"/>
+<path id="control-1-label-0" d="M 89,102 L 92.3,102 L 94.5,104.2 L 94.5,110.8 L 92.3,113 L 89,113 L 89,102" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-1" d="M 101.65,102 L 96.15,102 L 96.15,113 L 101.65,113" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-2" d="M 96.15,107.5 L 100.55,107.5" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-3" d="M 108.8,103.1 L 107.7,102 L 104.4,102 L 103.3,103.1 L 103.3,111.9 L 104.4,113 L 107.7,113 L 108.8,111.9" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-4" d="M 110.45,113 L 113.2,102 L 115.95,113" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-5" d="M 111.55,108.6 L 114.85,108.6" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-6" d="M 117.6,102 L 120.35,107.5 L 123.1,102" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-label-7" d="M 120.35,107.5 L 120.35,113" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-value-0" d="M 89,122.6 L 89,120.8 L 90.8,119 L 96.2,119 L 98,120.8 L 98,124.4 L 89,137 L 98,137" fill="none" stroke="#00ed95" stroke-width="1"/>
+<path id="control-1-value-1" d="M 107.9,137 L 107.9,119 L 100.7,131.6 L 109.7,131.6" fill="none" stroke="#00ed95" stroke-width="1"/>
+<path id="control-1-value-2" d="M 114.2,119 L 119.6,119 L 121.4,122.6 L 121.4,133.4 L 119.6,137 L 114.2,137 L 112.4,133.4 L 112.4,122.6 L 114.2,119" fill="none" stroke="#00ed95" stroke-width="1"/>
+<path id="control-1-unit-0" d="M 125.4,137 L 125.4,126 L 128.15,131.5 L 130.9,126 L 130.9,137" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-1-unit-1" d="M 138.05,127.1 L 136.95,126 L 133.65,126 L 132.55,127.1 L 132.55,130.4 L 133.65,131.5 L 136.95,131.5 L 138.05,132.6 L 138.05,135.9 L 136.95,137 L 133.65,137 L 132.55,135.9" fill="none" stroke="#00ed95" stroke-width="0.85"/>
+<path id="control-2-label-0" d="M 174.5,103.1 L 173.4,102 L 170.1,102 L 169,103.1 L 169,106.4 L 170.1,107.5 L 173.4,107.5 L 174.5,108.6 L 174.5,111.9 L 173.4,113 L 170.1,113 L 169,111.9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-1" d="M 176.15,102 L 176.15,110.8 L 177.25,113 L 180.55,113 L 181.65,110.8 L 181.65,102" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-2" d="M 188.8,103.1 L 187.7,102 L 184.4,102 L 183.3,103.1 L 183.3,106.4 L 184.4,107.5 L 187.7,107.5 L 188.8,108.6 L 188.8,111.9 L 187.7,113 L 184.4,113 L 183.3,111.9" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-3" d="M 190.45,102 L 195.95,102" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-4" d="M 193.2,102 L 193.2,113" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-5" d="M 197.6,113 L 200.35,102 L 203.1,113" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-6" d="M 198.7,108.6 L 202,108.6" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-7" d="M 204.75,102 L 210.25,102" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-8" d="M 207.5,102 L 207.5,113" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-9" d="M 204.75,113 L 210.25,113" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-label-10" d="M 211.9,113 L 211.9,102 L 217.4,113 L 217.4,102" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-value-0" d="M 178,119 L 172.6,119 L 169,124.4 L 169,135.2 L 170.8,137 L 176.2,137 L 178,135.2 L 178,129.8 L 176.2,128 L 169,128" fill="none" stroke="#ffffff" stroke-width="1"/>
+<path id="control-2-value-1" d="M 189.7,119 L 180.7,119 L 180.7,128 L 187.9,128 L 189.7,129.8 L 189.7,135.2 L 187.9,137 L 180.7,137" fill="none" stroke="#ffffff" stroke-width="1"/>
+<path id="control-2-unit-0" d="M 193.7,137 L 199.2,126" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-unit-1" d="M 193.7,126 L 194.8,126 L 194.8,128.2 L 193.7,128.2 L 193.7,126" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-2-unit-2" d="M 198.1,134.8 L 199.2,134.8 L 199.2,137 L 198.1,137 L 198.1,134.8" fill="none" stroke="#ffffff" stroke-width="0.85"/>
+<path id="control-3-label-0" d="M 249,113 L 249,102 L 252.3,102 L 254.5,104.2 L 254.5,105.3 L 252.3,107.5 L 249,107.5" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-1" d="M 251.2,107.5 L 254.5,113" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-2" d="M 261.65,102 L 256.15,102 L 256.15,113 L 261.65,113" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-3" d="M 256.15,107.5 L 260.55,107.5" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-4" d="M 263.3,102 L 263.3,113 L 268.8,113" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-5" d="M 275.95,102 L 270.45,102 L 270.45,113 L 275.95,113" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-6" d="M 270.45,107.5 L 274.85,107.5" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-7" d="M 277.6,113 L 280.35,102 L 283.1,113" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-8" d="M 278.7,108.6 L 282,108.6" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-9" d="M 290.25,103.1 L 289.15,102 L 285.85,102 L 284.75,103.1 L 284.75,106.4 L 285.85,107.5 L 289.15,107.5 L 290.25,108.6 L 290.25,111.9 L 289.15,113 L 285.85,113 L 284.75,111.9" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-10" d="M 297.4,102 L 291.9,102 L 291.9,113 L 297.4,113" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-label-11" d="M 291.9,107.5 L 296.3,107.5" fill="none" stroke="#ff423f" stroke-width="0.85"/>
+<path id="control-3-value-0" d="M 249.9,122.6 L 253.5,119 L 253.5,137" fill="none" stroke="#ff423f" stroke-width="1"/>
+<path id="control-3-value-1" d="M 249,137 L 258,137" fill="none" stroke="#ff423f" stroke-width="1"/>
+<path id="control-3-value-2" d="M 265.2,135.2 L 265.2,137" fill="none" stroke="#ff423f" stroke-width="1"/>
+<path id="control-3-value-3" d="M 272.4,122.6 L 272.4,120.8 L 274.2,119 L 279.6,119 L 281.4,120.8 L 281.4,124.4 L 272.4,137 L 281.4,137" fill="none" stroke="#ff423f" stroke-width="1"/>
+<path id="control-3-unit-0" d="M 290.9,127.1 L 289.8,126 L 286.5,126 L 285.4,127.1 L 285.4,130.4 L 286.5,131.5 L 289.8,131.5 L 290.9,132.6 L 290.9,135.9 L 289.8,137 L 286.5,137 L 285.4,135.9" fill="none" stroke="#ff423f" stroke-width="0.85"/></svg>

@@ -7,7 +7,7 @@ It does not relicense someone else's code, sound design, fonts or trademarks.
 
 The OP-1 UI kit's components, guidance, schematic alphabet, loaders and test
 fixtures are original SquareWave work under [MIT](LICENSE). The
-[source ledger](op1-ui/docs/SOURCES.md) links to TE's original guide, op1hacks,
+[source ledger](op1-ui/docs/SOURCES.md) links to op1hacks,
 op1repacker, pcppcp/op1r, Hundekraft, Maiko and the other references, with reviewed
 revisions and evidence limits. Those projects retain their own licences and
 copyrights. Reference does not imply endorsement.
@@ -75,3 +75,7 @@ redistribute other companies' source, firmware, fonts, presets or other assets.
 This repository contains documentation, host previews and the reusable synthesis
 core. The linked native source has its own component notices. No installable
 plugin, stock firmware image or extracted font data is distributed here.
+
+The design kit also cites maxaw and Instant_Fidelity’s [layout and graphics observations](https://op-forums.com/t/custom-firmware-on-the-op-1/4283/1373).
+Its [stock resource notes](op1-ui/docs/STOCK.md) describe privately inspected #246
+resource metadata. Original example drawings contain no extracted stock geometry.

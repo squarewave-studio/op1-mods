@@ -23,4 +23,4 @@ jobs:
       - run: python3 -m unittest discover -s op1-ui/tests
       - run: node op1-ui/tools/export_examples.mjs
       - run: python3 op1-ui/tools/check_svg.py op1-ui/examples/*.svg
-      - run: git diff --exit-code -- op1-ui/examples
+      - run: git diff --exit-code -- op1-ui/examples op1-ui/docs/EXAMPLES.md

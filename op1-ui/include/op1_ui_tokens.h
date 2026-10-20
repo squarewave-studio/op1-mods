@@ -4,6 +4,7 @@
 /* Logical pixels; multiply by 1024 only in a Q10 geometry adapter. */
 #define OP1_UI_WIDTH 320
 #define OP1_UI_HEIGHT 160
+#define OP1_UI_CRITICAL_CONTENT_BOTTOM 140
 #define OP1_UI_INSET_LEFT 8
 #define OP1_UI_INSET_TOP 8
 #define OP1_UI_INSET_RIGHT 8
@@ -14,7 +15,7 @@
 #define OP1_UI_RGBA_BACKGROUND { 0, 0, 0, 255 }
 #define OP1_UI_RGBA_BLUE { 105, 142, 255, 255 }
 #define OP1_UI_RGBA_GREEN { 0, 237, 149, 255 }
-#define OP1_UI_RGBA_WHITE { 230, 231, 255, 255 }
+#define OP1_UI_RGBA_WHITE { 255, 255, 255, 255 }
 #define OP1_UI_RGBA_ORANGE { 255, 66, 63, 255 }
 #define OP1_UI_RGBA_SECONDARY { 185, 185, 201, 255 }
 #define OP1_UI_RGBA_DECORATIVE { 98, 93, 119, 255 }

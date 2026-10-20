@@ -10,6 +10,8 @@ Small/Medium/Large text scale, four encoder colour roles, screen margins and
 practical SVG/performance guidance. It includes reusable components, an
 optional local preview and the [op1-design skill](skills/op1-design/SKILL.md).
 Install it in a firmware project with `npx skills add squarewave-studio/op1-mods`.
+[Screen Examples](op1-ui/docs/EXAMPLES.md) show original synth, sampler, envelope,
+FX, sequencer, tape and mixer layouts informed by stock #246 display resources.
 The static guide needs no font setup. Faithful local previews use your own
 `opfont.svg`; no TE font or firmware is included. [Sources and evidence limits](op1-ui/docs/SOURCES.md) ·
 [Contribute](CONTRIBUTING.md) · [MIT licence](LICENSE).

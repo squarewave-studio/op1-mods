@@ -13,6 +13,8 @@ in this public image. Load a local stock font for typography review.*
 ## Start Here
 
 - [Design](docs/DESIGN.md): hierarchy, Small/Medium/Large, colours and margins.
+- [Screen Examples](docs/EXAMPLES.md): original screens based on stock firmware families.
+- [Stock Screen Patterns](docs/STOCK.md): local resource census and evidence limits.
 - [Fonts](docs/FONTS.md): where to get `opfont.svg`, stock IDs, glyph checks and host loading.
 - [Graphics](docs/GRAPHICS.md): restricted SVG, named blocks, smooth edges and CPU cost.
 - [Components](docs/COMPONENTS.md): APIs, layouts and runtime binding contracts.
@@ -36,8 +38,8 @@ It starts in labelled schematic-font mode. If you need faithful typography,
 choose your own `opfont.svg` with the file picker. The browser reads it on your
 machine and uploads nothing. The kit does not serve TE assets.
 
-The workbench's Play, Edit and Browse layouts demonstrate components and states.
-They are not a synth or tape backend. The main Pages site is static guidance.
+The workbench's Play and Edit layouts demonstrate components.
+They are not a synth backend. The main Pages site is static guidance.
 
 ## Use A Component
 

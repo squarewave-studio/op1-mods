@@ -1,7 +1,7 @@
 # Components and adapters
 
 The kit provides layout primitives, an original schematic vector alphabet and
-three reference screens. It is not a C firmware GUI framework. Original JS/C
+playing/editor references and 14 stock-informed screen examples. It is not a C firmware GUI framework. Original JS/C
 constants and examples are MIT; native SDKs and font assets retain their own terms.
 
 ## Public reference API
@@ -33,9 +33,10 @@ baseline. The library remeasures the full pair in stock host mode. The
 library will reject a value/unit pair that does not fit. Use deliberate unit
 formatting or a different arrangement rather than a tiny-font fallback.
 
-`screens.mjs` exposes `playScreen`, `editorScreen`, `libraryScreen`. They are
+`screens.mjs` exposes `playScreen` and `editorScreen`; `patterns.mjs` supplies
+the [Screen Examples](EXAMPLES.md). They are
 original layout demonstrations, not clones of TE screens or implementations of
-GIN/Tape Archive. Their ranges and controls are examples. Connect your actual
+a released instrument. Their ranges and controls are examples. Connect your actual
 model and documented input contract. The workbench's few T-key simulations do
 not establish that every displayed feature has a backend.
 

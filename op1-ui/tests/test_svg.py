@@ -26,6 +26,7 @@ class SvgChecks(unittest.TestCase):
 
     def test_disconnected_fill_and_duplicate_ids(self):
         self.assertTrue(self.check('<path d="M 1,2 L 3,4 z M 5,6 L 7,8 z" fill="#ffffff" stroke="#ffffff"/>'))
+        self.assertTrue(self.check('<path d="M 1,2 L 3,4 M 5,6 L 7,8" fill="none" stroke="#ffffff"/>'))
         self.assertTrue(self.check('<g id="same"/><g id="same"/>'))
 
 if __name__ == '__main__': unittest.main()

@@ -1,6 +1,6 @@
-import { scene, line, text, parameter, header, softKeys, envelope, selectionList, status } from './components.mjs';
+import { scene, line, text, parameter, header, softKeys, envelope } from './components.mjs';
 
-// Original reference layouts; these are not GIN or Tape Archive implementations.
+// Original playing and editor layouts. Controls are illustrative.
 export function playScreen({ values = [40, 40, 40, 40], shift = false } = {}) {
   const s = scene();
   const labels = shift ? ['MORPH', 'MOD', 'NOISE', 'CUTOFF'] : ['MORPH', 'PITCH', 'DECAY', 'BALANCE'];
@@ -25,15 +25,5 @@ export function editorScreen({ attack = 145, decay = 158, side = 'A' } = {}) {
   parameter(s, { id: 'attack', label: 'ATTACK', value: String(attack), unit: 'MS', lane: 1, x: 89, y: 88 });
   parameter(s, { id: 'decay', label: 'DECAY', value: String(decay), unit: 'MS', lane: 2, x: 169, y: 88 });
   softKeys(s, ['EXIT', 'PREV', 'NEXT', 'NAME']);
-  return s;
-}
-
-export function libraryScreen({ selected = 1, items = ['FIRST LIGHT', 'NIGHT BUS', 'SLOW WAVES'], state = 'ready' } = {}) {
-  const s = scene();
-  header(s, { title: 'TAPE LIBRARY', right: 'BROWSE' });
-  if (state === 'loading') status(s, { message: 'LOADING', detail: 'READING TAPE LIST' });
-  else if (state === 'error') status(s, { message: 'READ FAILED', detail: 'T1 BACK / T3 RETRY', error: true });
-  else selectionList(s, { items, selected });
-  softKeys(s, state === 'error' ? ['BACK', '', 'RETRY', ''] : state === 'loading' ? ['BACK', '', '', ''] : items.length ? ['BACK', 'INFO', 'LOAD', 'TOOLS'] : ['BACK', '', '', '']);
   return s;
 }

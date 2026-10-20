@@ -14,3 +14,6 @@ Start with ../skills/op1-design/SKILL.md, the source of the shared rules.
 
 No TE code, fonts, glyph geometry or firmware is bundled. Stock-font fidelity
 requires the user's local resource; schematic previews do not qualify it.
+
+Original screen examples: docs/EXAMPLES.md
+Stock resource observations and source limits: docs/STOCK.md

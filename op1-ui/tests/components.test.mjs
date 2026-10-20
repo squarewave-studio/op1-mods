@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { scene, text, line, parameter, validateScene, renderSvg, tokens } from '../src/components.mjs';
-import { playScreen, editorScreen, libraryScreen } from '../src/screens.mjs';
+import { playScreen, editorScreen } from '../src/screens.mjs';
+import { patterns } from '../src/patterns.mjs';
 
 test('all reference states and boundary values fit including stroke extents', () => {
   const states = [playScreen(), playScreen({ values: [0, 100, 0, 100], shift: true }),
     editorScreen({ attack: 0, decay: 999 }), editorScreen({ side: 'B' }),
-    libraryScreen(), libraryScreen({ selected: 0 }), libraryScreen({ selected: 2 }),
-    libraryScreen({ items: [] }), libraryScreen({ state: 'error' }), libraryScreen({ state: 'loading' })];
+    ...patterns.map(p => p.build())];
   for (const s of states) assert.deepEqual(validateScene(s), []);
 });
 test('no hidden size fallback; long text and missing glyphs are explicit errors', () => {
@@ -34,10 +34,10 @@ test('exported SVG is self-contained paths with explicit commands and escaped me
   assert(svg.includes('&lt;script&gt;'));
   assert(!/<text|<use|<image|style=|transform=|https?:\/\/(?!www.w3.org)/.test(svg));
 });
-test('list window follows selection and rejects stale indices', () => {
-  const s = libraryScreen({ items: ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'], selected: 4 });
-  assert.deepEqual(validateScene(s), []);
-  assert.throws(() => libraryScreen({ selected: -1 }), /Selection/);
+test('screen examples keep all stroked ink inside the critical-content guide', () => {
+  for (const p of patterns) for (const node of p.build().nodes) for (const [x,y] of node.points) {
+    assert(y+node.width/2 <= tokens.safeArea.criticalContentBottom, `${p.id}/${node.id}`);
+  }
 });
 test('Play names and values share their edge anchors; editor preserves encoder columns', () => {
   const s = playScreen({ values: [0, 100, 100, 0] });

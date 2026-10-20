@@ -47,8 +47,8 @@ def check(path):
                 op, numbers = command.group(1), re.findall(NUM, command.group(2))
                 expected = {'M': 2, 'L': 2, 'C': 6, 'z': 0, 'Z': 0}[op]
                 if len(numbers) != expected: errors.append(f'Path {op}: needs exactly {expected} coordinates; repeat command letters')
-            if node.get('fill') != 'none' and sum(c.group(1) == 'M' for c in commands) > 1:
-                errors.append('Split disconnected filled contours into separate paths')
+            if sum(c.group(1) == 'M' for c in commands) > 1:
+                errors.append('Split disconnected contours into separate paths')
     if len(raw) > 8192: warnings.append(f'{len(raw)} bytes exceeds the 8 KiB artwork target; measure native cost (not a loader limit)')
     return sorted(set(errors)), warnings
 

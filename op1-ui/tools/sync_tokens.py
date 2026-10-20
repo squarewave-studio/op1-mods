@@ -17,6 +17,7 @@ def outputs():
              '/* Logical pixels; multiply by 1024 only in a Q10 geometry adapter. */']
     for key, value in data['coordinateSpace'].items():
         if isinstance(value, int): lines.append(f'#define OP1_UI_{key.upper()} {value}')
+    lines.append(f'#define OP1_UI_CRITICAL_CONTENT_BOTTOM {data["safeArea"]["criticalContentBottom"]}')
     for key in ('left', 'top', 'right', 'bottom'):
         lines.append(f'#define OP1_UI_INSET_{key.upper()} {data["safeArea"][key]}')
     for key, value in data['type'].items():
@@ -26,7 +27,7 @@ def outputs():
         lines.append(f'#define OP1_UI_RGBA_{key.upper()} {{ {rgb}, 255 }}')
     lines += ['#endif', '']
     human = source.split('<!-- spec:start -->\n', 1)[1].split('<!-- spec:end -->', 1)[0]
-    human = human.replace('(references/GRAPHICS.md)', '(GRAPHICS.md)')
+    human = re.sub(r'\(references/([A-Z]+\.md)\)', r'(\1)', human)
     return {ROOT / 'src/tokens.mjs': js, ROOT / 'include/op1_ui_tokens.h': '\n'.join(lines),
             ROOT / 'tokens/op1-ui.json': json.dumps(data, indent=2) + '\n',
             ROOT.parent / 'design-kit.json': json.dumps(spec, indent=2) + '\n',

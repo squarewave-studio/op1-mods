@@ -11,8 +11,9 @@ Use original artwork. Copying a stock drawing is unnecessary to follow this gram
 Keep the playing surface immediate. Put detailed editing on clearly named pages.
 Show what is selected and what the next encoder movement will change. Prefer
 an understandable metaphor and a few controls over a miniature desktop panel.
-These are design interpretations of the [original guide](https://teenage.engineering/guides/op-1/original),
-not published TE design-system rules.
+These are design interpretations informed by the stock #246 display resources,
+not published TE design-system rules. See [Stock Screen Patterns](STOCK.md)
+for the resource census, original examples and the limits of static artwork.
 
 ## Three Text Roles
 
@@ -42,7 +43,7 @@ Blue, Green, White, Orange, in physical order. Keep the label, edited value and
 corresponding visual feature associated with the same lane colour. Labels,
 position and shape should also identify ownership, so the UI remains usable
 without colour discrimination. The fourth control is called Orange here;
-older op1r documentation sometimes calls it Red. The GIN reference RGB for that
+older op1r documentation sometimes calls it Red. The #246 colour-resource RGB for that
 role is red-orange; it does not change its physical identity.
 
 Primary and Shift control maps should be documented side by side. Keep an
@@ -79,38 +80,53 @@ Proposed content insets are Left/Right/Top **8**, Bottom **16** logical units.
 The resulting safe rectangle is `x=[8,312]`, `y=[8,144]`. Include stroke extents,
 text overhang, animation extremes, unit baselines and descenders within it.
 Full-screen clears/veils may intentionally cover the whole canvas. The example
-footer begins at y=132, leaving room for an 11-unit glyph and its stroke.
+footer begins at y=128, keeping its 11-unit glyph and stroke above y=140.
 
-Joe reports lower-edge obstruction from the case/window. Kennel documents a
-12-unit upward composition correction for several effects. Neither establishes
-a universal measured bezel inset. Our 16-unit default needs real-display checks.
+[maxaw reports 147 units of usable height](https://op-forums.com/t/custom-firmware-on-the-op-1/4283/1371).
+[Instant_Fidelity recommends keeping content above about y=140](https://op-forums.com/t/custom-firmware-on-the-op-1/4283/1373).
+These are attributed device observations, not a universal clipping boundary.
+Keep critical text and controls, including stroke extents, at or above y=140 as
+a cautious working guide. The default safe rectangle still ends at y=144; its
+last four units are clearance, not a target for important content. Kennel's
+12-unit effect composition lift is a separate framework correction. Physical
+display revisions and the case/window still need checks.
 Do not add a framework's translation twice. Move artwork, text, pivots and
 clipping together, while keeping full-screen veils full-screen.
 
-Use 4-unit spacing as a starting grid: 4 between related items, 8 between
-groups, 12 between sections. Optical alignment may override the grid. These
-spacing values are library proposals, not stock measurements.
+Use an 8-unit layout grid with 4-unit subdivisions: 4 between related items,
+8 between groups, 12 between sections. This adopts maxaw’s grid suggestion.
+Optical alignment and measured glyph bounds can override the grid. These are
+library proposals, not stock measurements.
 
 ## Palette And Strokes
 
 | Role | Reference RGB | Status |
 | --- | --- | --- |
-| Background | `#000000` | GIN reference; black canvas |
-| Blue | `#698eff` | GIN reference encoder colour |
-| Green | `#00ed95` | GIN reference encoder colour |
-| White | `#e6e7ff` | GIN reference encoder colour |
-| Orange | `#ff423f` | GIN reference encoder colour |
+| Background | `#000000` | Stock #246 colour resource |
+| Blue | `#698eff` | Stock #246 colour resource |
+| Green | `#00ed95` | Stock #246 colour resource |
+| White | `#ffffff` | Stock #246 colour resource |
+| Orange | `#ff423f` | Stock #246 colour resource |
 | Secondary | `#b9b9c9` | Original library choice for readable secondary text |
 | Decorative | `#625d77` | GIN reference dim tone; nonessential decoration only |
 
-These are reproducible preview values, **not certified stock TE colour constants
-or calibrated OLED colours**. Stock dynamic colours are associated with
-`colors.svg`; static artwork can carry its own values. A future measured stock
-profile should be separately named and sourced. Never use the dim tone for
-essential small text or let a warning depend only on red/orange.
+The named `stock-246-resource` profile takes the four encoder values from a
+locally inspected stock `colors.svg`. It is not OLED colour calibration. Static
+stock artwork uses variants: mixer and sampler include `#ff3a5d`, while EQ
+includes `#dfd9ff` and `#aeb1dc`. The forum profile’s `#4d9eff` Blue is not the
+Blue entry in this #246 resource. Do not silently combine profiles or claim one
+universal palette across firmware and screens. Secondary and Decorative are
+kit choices. Never use dim tones for essential Small text or make a warning
+depend only on red/orange. [Stock evidence](STOCK.md) records hashes.
 
-Start with 0.85–1 logical-unit strokes for text and ordinary outlines, 1.5 for
-emphasis. These are proposals. Check curves, diagonals and fractional positions
+Use centred strokes and include half the width on each side when measuring
+ink bounds. For a 1.5-unit line at x=8, the outer ink reaches x=7.25. There is
+no portable inside/outside stroke setting in this native profile; inset the
+centreline yourself. Use 1.5 units for ordinary artwork and 2 for emphasis,
+reflecting common widths in the inspected stock resources. Text uses 0.85–1
+unit strokes as proposed for these nominal role sizes, not as a measured stock
+minimum. Avoid functional hairlines thinner than 1 without target checks.
+Check curves, diagonals and fractional positions
 at actual size; thicker is not automatically clearer. See [Graphics](GRAPHICS.md)
 for renderer-specific antialiasing and why raster supersampling is a host tool.
 

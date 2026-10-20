@@ -19,6 +19,8 @@ PAGES = {'start.html': ('Start Building', SOURCE / 'README.md'),
          'fonts.html': ('Stock Font Setup', SOURCE / 'docs/FONTS.md'),
          'graphics.html': ('Graphics And CPU', SOURCE / 'docs/GRAPHICS.md'),
          'components.html': ('Components', SOURCE / 'docs/COMPONENTS.md'),
+         'stock.html': ('Stock Screen Patterns', SOURCE / 'docs/STOCK.md'),
+         'examples.html': ('Screen Examples', SOURCE / 'docs/EXAMPLES.md'),
          'credits.html': ('Sources And Credits', SOURCE / 'docs/SOURCES.md'),
          'contributing.html': ('Contributing', ROOT / 'CONTRIBUTING.md'),
          'licence.html': ('MIT Licence', ROOT / 'LICENSE')}
@@ -63,6 +65,10 @@ def main():
         if source.name == 'LICENSE': body = '# MIT Licence\n\n```text\n' + body + '\n```'
         body = rewrite(body, source)
         result = markdown.markdown(body, extensions=['tables', 'fenced_code'])
+        if filename == 'examples.html':
+            catalogue = json.loads((SOURCE / 'examples/catalogue.json').read_text())
+            cards = ''.join(f'<figure><img src="examples/{item["id"]}.svg" width="320" height="160" alt="{html.escape(item["title"])}: original schematic code render"><figcaption><h2>{html.escape(item["title"])}</h2><p>{html.escape(item["lesson"])}</p></figcaption></figure>' for item in catalogue)
+            result = '<h1>Screen Examples</h1><p>Original compositions informed by stock #246 screen families. These are schematic code renders, not stock screens or hardware captures. No font loading is needed.</p><p><a href="stock.html">Stock Resources And Design Lessons ↗</a></p><div class="screen-gallery">' + cards + '</div>'
         (out / filename).write_text(render_page(title, result))
     agents = '''<h1>For Agents</h1><p>Install the op1-design skill in your firmware project.</p><pre><code>npx skills add squarewave-studio/op1-mods</code></pre><p>Select op1-design. It includes the screen rules, stock-font setup and SVG guidance.</p><p><a href="skills/op1-design/SKILL.md">Read The Skill</a> · <a href="design-kit.json">design-kit.json</a> · <a href="spec.html">Spec</a></p><p>The skill owns the shared rules. The Spec and JSON are built from the same source.</p>'''
     (out / 'agents.html').write_text(render_page('For Agents', agents))

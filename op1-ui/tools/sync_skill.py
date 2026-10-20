@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def outputs():
     skill = ROOT / 'skills/op1-design'
     result = {}
-    for name in ('FONTS', 'GRAPHICS', 'SOURCES'):
+    for name in ('FONTS', 'GRAPHICS', 'SOURCES', 'STOCK'):
         result[ROOT / f'op1-ui/docs/{name}.md'] = (skill / f'references/{name}.md').read_text()
     result[skill / 'scripts/inspect_font.py'] = (ROOT / 'op1-ui/tools/inspect_font.py').read_text()
     return result

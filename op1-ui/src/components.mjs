@@ -62,7 +62,7 @@ export function header(s, { title, context = '', right = '' }) {
 
 export function softKeys(s, labels) {
   if (labels.length !== 4) throw new RangeError('Supply four T-key labels; use empty strings for unused keys');
-  labels.forEach((value, i) => text(s, { id: `t${i + 1}`, value, x: 40 + i * 80, y: 132, align: 'center', maxWidth: 62 }));
+  labels.forEach((value, i) => text(s, { id: `t${i + 1}`, value, x: 40 + i * 80, y: 128, align: 'center', maxWidth: 62 }));
 }
 
 export function envelope(s, { x = 90, y = 48, width = 212, height = 28, attack = 0.25, decay = 0.55 } = {}) {
@@ -79,7 +79,7 @@ export function status(s, { message, detail = '', error = false }) {
 }
 
 export function selectionList(s, { items, selected = 0 }) {
-  if (!items.length) { status(s, { message: 'NO TAPES', detail: 'ADD A TAPE TO BEGIN' }); return; }
+  if (!items.length) { status(s, { message: 'NO ITEMS', detail: 'NOTHING AVAILABLE' }); return; }
   if (!Number.isInteger(selected) || selected < 0 || selected >= items.length) throw new RangeError('Selection outside list');
   const first = Math.min(Math.max(0, selected - 1), Math.max(0, items.length - 3));
   items.slice(first, first + 3).forEach((value, i) => {
