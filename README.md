@@ -3,6 +3,8 @@
 I still make music on the original OP-1, so I've started building new things
 for it. First up is GIN, a drum synth.
 
+Building OP-1 screens? See the [OP-1 Design Kit](https://github.com/squarewave-studio/op1-design-kit).
+
 ## GIN: Synth Drums On All 24 Keys
 
 [![Watch the GIN demo on YouTube](https://img.youtube.com/vi/YZD0u1V243E/hqdefault.jpg)](https://www.youtube.com/watch?v=YZD0u1V243E)

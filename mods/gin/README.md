@@ -1,5 +1,7 @@
 # GIN
 
+Designing your own instrument screen? See the [OP-1 Design Kit](https://github.com/squarewave-studio/op1-design-kit) for the shared UI guidance.
+
 Synth drums on all 24 keys of the original OP-1, by [SquareWave Studio](https://squarewave.studio).
 
 [![Watch the GIN demo on YouTube](https://img.youtube.com/vi/YZD0u1V243E/hqdefault.jpg)](https://www.youtube.com/watch?v=YZD0u1V243E)
