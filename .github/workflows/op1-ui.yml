@@ -1,0 +1,26 @@
+name: OP-1 UI
+on:
+  pull_request:
+    paths: ['op1-ui/**', 'skills/op1-design/**', 'design-kit.json', '.github/workflows/op1-ui.yml']
+  push:
+    paths: ['op1-ui/**', 'skills/op1-design/**', 'design-kit.json', '.github/workflows/op1-ui.yml']
+permissions:
+  contents: read
+jobs:
+  host-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 op1-ui/tools/sync_tokens.py --check
+      - run: python3 op1-ui/tools/sync_skill.py --check
+      - run: node --test op1-ui/tests/*.test.mjs
+      - run: python3 -m unittest discover -s op1-ui/tests
+      - run: node op1-ui/tools/export_examples.mjs
+      - run: python3 op1-ui/tools/check_svg.py op1-ui/examples/*.svg
+      - run: git diff --exit-code -- op1-ui/examples

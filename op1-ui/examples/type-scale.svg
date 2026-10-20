@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160"><rect x="0" y="0" width="320" height="160" fill="#000000"/>
+<path id="small-0" d="M 21.5,17.1 L 20.4,16 L 17.1,16 L 16,17.1 L 16,20.4 L 17.1,21.5 L 20.4,21.5 L 21.5,22.6 L 21.5,25.9 L 20.4,27 L 17.1,27 L 16,25.9" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-1" d="M 23.15,27 L 23.15,16 L 25.9,21.5 L 28.65,16 L 28.65,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-2" d="M 30.3,27 L 33.05,16 L 35.8,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-3" d="M 31.4,22.6 L 34.7,22.6" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-4" d="M 37.45,16 L 37.45,27 L 42.95,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-5" d="M 44.6,16 L 44.6,27 L 50.1,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-6" d="M 58.9,27 L 64.4,16" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-7" d="M 73.75,18.2 L 75.95,16 L 75.95,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-8" d="M 73.2,27 L 78.7,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-9" d="M 80.9,18.2 L 83.1,16 L 83.1,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="small-10" d="M 80.35,27 L 85.85,27" fill="none" stroke="#e6e7ff" stroke-width="0.85"/>
+<path id="medium-0" d="M 16,62 L 16,44 L 20.5,53 L 25,44 L 25,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-1" d="M 36.7,44 L 27.7,44 L 27.7,62 L 36.7,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-2" d="M 27.7,53 L 34.9,53" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-3" d="M 39.4,44 L 44.8,44 L 48.4,47.6 L 48.4,58.4 L 44.8,62 L 39.4,62 L 39.4,44" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-4" d="M 51.1,44 L 60.1,44" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-5" d="M 55.6,44 L 55.6,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-6" d="M 51.1,62 L 60.1,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-7" d="M 62.8,44 L 62.8,58.4 L 64.6,62 L 70,62 L 71.8,58.4 L 71.8,44" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-8" d="M 74.5,62 L 74.5,44 L 79,53 L 83.5,44 L 83.5,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-9" d="M 97.9,62 L 106.9,44" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-10" d="M 122.2,47.6 L 125.8,44 L 125.8,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-11" d="M 121.3,62 L 130.3,62" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-12" d="M 134.8,44 L 140.2,44 L 142,45.8 L 142,51.2 L 140.2,53 L 134.8,53 L 133,51.2 L 133,45.8 L 134.8,44" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="medium-13" d="M 134.8,53 L 133,54.8 L 133,60.2 L 134.8,62 L 140.2,62 L 142,60.2 L 142,54.8 L 140.2,53" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="large-0" d="M 16,93.6 L 16,90.8 L 18.8,88 L 27.2,88 L 30,90.8 L 30,96.4 L 16,116 L 30,116" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="large-1" d="M 37,88 L 45.4,88 L 48.2,90.8 L 48.2,99.2 L 45.4,102 L 37,102 L 34.2,99.2 L 34.2,90.8 L 37,88" fill="none" stroke="#e6e7ff" stroke-width="1"/>
+<path id="large-2" d="M 37,102 L 34.2,104.8 L 34.2,113.2 L 37,116 L 45.4,116 L 48.2,113.2 L 48.2,104.8 L 45.4,102" fill="none" stroke="#e6e7ff" stroke-width="1"/></svg>

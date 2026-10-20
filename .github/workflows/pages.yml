@@ -1,0 +1,43 @@
+name: Design Kit Pages
+on:
+  pull_request:
+    paths: ['op1-ui/**', 'skills/op1-design/**', 'design-kit.json', 'CONTRIBUTING.md', 'LICENSE', '.github/workflows/pages.yml']
+  push:
+    branches: [main]
+    paths: ['op1-ui/**', 'skills/op1-design/**', 'design-kit.json', 'CONTRIBUTING.md', 'LICENSE', '.github/workflows/pages.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: design-kit-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install Markdown==3.7
+      - run: python3 op1-ui/tools/sync_tokens.py --check
+      - run: python3 op1-ui/tools/sync_skill.py --check
+      - run: python3 op1-ui/tools/build_site.py
+      - run: python3 op1-ui/tools/check_site.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out/pages
+  deploy:
+    if: github.ref == 'refs/heads/main' && vars.ENABLE_DESIGN_KIT_PAGES == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

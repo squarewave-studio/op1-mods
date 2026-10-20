@@ -10,3 +10,12 @@ __pycache__/
 *.o
 
 mods/gin/core/out/
+
+# Proprietary resources and local-only derived font data are never public assets.
+opfont.svg
+kerntable.db
+colors.svg
+*.private.inc
+*font-atlas*
+*.knl
+*.op1font.json

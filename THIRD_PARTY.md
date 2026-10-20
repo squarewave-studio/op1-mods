@@ -3,6 +3,23 @@
 The MIT licence covers Squarewave Studio's original work in this repository.
 It does not relicense someone else's code, sound design, fonts or trademarks.
 
+## OP-1 UI references and local fonts
+
+The OP-1 UI kit's components, guidance, schematic alphabet, loaders and test
+fixtures are original SquareWave work under [MIT](LICENSE). The
+[source ledger](op1-ui/docs/SOURCES.md) links to TE's original guide, op1hacks,
+op1repacker, pcppcp/op1r, Hundekraft, Maiko and the other references, with reviewed
+revisions and evidence limits. Those projects retain their own licences and
+copyrights. Reference does not imply endorsement.
+
+No third-party UI code, SDK headers, stock drawings or font assets are bundled
+with the kit. Its independently written host loader accepts a user-supplied
+local `opfont.svg` in memory; neither the MIT licence nor that capability grants
+redistribution rights to the font, kerning database or derived glyph data.
+The original schematic font in committed examples is explicitly distinguished
+from stock TE lettering. Native code examples elsewhere in the ecosystem can
+carry GPL and additional firmware terms; their APIs are cited, not copied here.
+
 ## op1r
 
 [op1r-src](https://github.com/pcppcp/op1r-src) is by pcppcp and contributors,

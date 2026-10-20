@@ -3,6 +3,17 @@
 I still make music on the original OP-1, so I've started building new things
 for it. First up is GIN, a drum synth.
 
+## OP-1 UI: A Shared Design Kit
+
+Building a synth, effect or tool? [OP-1 UI](op1-ui/README.md) proposes a shared
+Small/Medium/Large text scale, four encoder colour roles, screen margins and
+practical SVG/performance guidance. It includes reusable components, an
+optional local preview and the [op1-design skill](skills/op1-design/SKILL.md).
+Install it in a firmware project with `npx skills add squarewave-studio/op1-mods`.
+The static guide needs no font setup. Faithful local previews use your own
+`opfont.svg`; no TE font or firmware is included. [Sources and evidence limits](op1-ui/docs/SOURCES.md) ·
+[Contribute](CONTRIBUTING.md) · [MIT licence](LICENSE).
+
 ## GIN: Synth Drums On All 24 Keys
 
 [![Watch the GIN demo on YouTube](https://img.youtube.com/vi/YZD0u1V243E/hqdefault.jpg)](https://www.youtube.com/watch?v=YZD0u1V243E)
@@ -49,6 +60,7 @@ Orbital and Tape Archive have folders ready, with no releases yet.
 | [mods/gin](mods/gin/README.md) | Drum synthesis |
 | [mods/orbital](mods/orbital/README.md) | Sequencing |
 | [mods/tape-archive](mods/tape-archive/README.md) | Tape storage workflow |
+| [op1-ui](op1-ui/README.md) | Shared UI guidance, components and agent skill |
 
 ## Licence And Credits
 
@@ -63,9 +75,9 @@ host adapters and loader changes are kept separately in the op1r
 contribution, so a combined plugin binary isn't automatically MIT-only. See
 [THIRD_PARTY.md](THIRD_PARTY.md).
 
-These are unofficial mods by [SquareWave Studio](https://squarewave.studio).
-They are not affiliated with, authorised by, sponsored by or endorsed by Teenage
-Engineering AB or Sonic Charge / NuEdge Development AB. All trademarks belong
+These are mods by [SquareWave Studio](https://squarewave.studio).
+Unofficial. Not affiliated with, authorised by or endorsed by Teenage Engineering AB.
+Not affiliated with Sonic Charge / NuEdge Development AB. All trademarks belong
 to their respective owners. See the [ownership and source-publication notes](THIRD_PARTY.md#independence-and-trademarks).
 
 ## Support My Open Source Work

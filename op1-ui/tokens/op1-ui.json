@@ -1,0 +1,85 @@
+{
+  "version": "0.1.0",
+  "status": "draft",
+  "target": "original-op1",
+  "coordinateSpace": {
+    "width": 320,
+    "height": 160,
+    "unit": "logical-pixel"
+  },
+  "safeArea": {
+    "left": 8,
+    "top": 8,
+    "right": 8,
+    "bottom": 16,
+    "status": "proposed-default-not-measured-bezel"
+  },
+  "type": {
+    "small": {
+      "nominalHeight": 11,
+      "lineHeight": 16,
+      "strokeWidth": 0.85,
+      "role": "labels, units, context and soft keys"
+    },
+    "medium": {
+      "nominalHeight": 18,
+      "lineHeight": 24,
+      "strokeWidth": 1,
+      "role": "editor values and selected list entries"
+    },
+    "large": {
+      "nominalHeight": 28,
+      "lineHeight": 36,
+      "strokeWidth": 1,
+      "role": "primary performance values"
+    }
+  },
+  "color": {
+    "background": "#000000",
+    "blue": "#698eff",
+    "green": "#00ed95",
+    "white": "#e6e7ff",
+    "orange": "#ff423f",
+    "secondary": "#b9b9c9",
+    "decorative": "#625d77"
+  },
+  "encoderOrder": [
+    "blue",
+    "green",
+    "white",
+    "orange"
+  ],
+  "space": {
+    "unit": 4,
+    "related": 4,
+    "group": 8,
+    "section": 12
+  },
+  "stroke": {
+    "fine": 0.85,
+    "normal": 1,
+    "emphasis": 1.5
+  },
+  "artwork": {
+    "targetBytes": 8192,
+    "maxDecimals": 4,
+    "status": "community-budget-not-renderer-limit"
+  },
+  "provenance": {
+    "type": "Three roles proposed by Joe; nominal primary text heights observed in public GIN source, not verified TE ink metrics or an official stock scale.",
+    "color": "GIN reference RGB values; secondary is an original library choice. Not measured TE/OLED calibration.",
+    "safeArea": "Bottom clearance responds to Joe's case/window observation and Kennel's documented 12px composition lift; 16px is a proposed starting inset."
+  },
+  "layout": {
+    "encoderColumnLeft": [
+      9,
+      89,
+      169,
+      249
+    ],
+    "playLeftAnchor": 9,
+    "playRightAnchor": 311,
+    "valueUnitGap": 4,
+    "status": "proposed-reference-layout"
+  }
+}

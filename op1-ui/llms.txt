@@ -1,0 +1,16 @@
+# OP-1 UI · SquareWave Studio
+
+Draft original-OP-1 design kit; not a Teenage Engineering specification.
+Start with ../skills/op1-design/SKILL.md, the source of the shared rules.
+
+- README.md: quick start, components, preview and validation commands
+- tokens/op1-ui.json: canonical nominal sizes, encoder palette and safe-area defaults
+- docs/DESIGN.md: hierarchy, readability, controls and state
+- docs/FONTS.md: private stock font acquisition, IDs, glyph checks and host metrics
+- docs/GRAPHICS.md: native SVG subset, visibility, caches, smooth edges and CPU
+- docs/COMPONENTS.md: APIs and framework adapter contracts
+- docs/SOURCES.md: primary references, pins, attribution and evidence limits
+- ../CONTRIBUTING.md and ../LICENSE: contribution and MIT terms
+
+No TE code, fonts, glyph geometry or firmware is bundled. Stock-font fidelity
+requires the user's local resource; schematic previews do not qualify it.
