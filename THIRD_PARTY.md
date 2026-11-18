@@ -15,10 +15,11 @@ The Drum Synth API, loader and native adapters are part of a separate op1r
 contribution. A plugin built with GPL code is covered by the GPL, even though
 the synthesis core here is MIT.
 
-## libpo32
+## libpo
 
-GIN's synthesis core derives from [libpo32](https://github.com/ericlewis/libpo32),
-Copyright (c) 2026 Eric Lewis, under MIT. The synthesis subset is included in `mods/gin/core/third_party/libpo32`,
+GIN's synthesis core derives from [libpo](https://github.com/ericlewis/libpo),
+formerly libpo32. Copyright (c) 2026 Eric Lewis, under MIT.
+The PO-32 synthesis subset is included in `mods/gin/core/third_party/libpo32`,
 with its MIT licence and provenance notice. Preserve both when reusing it.
 
 ## CNTR RNDM

@@ -1,6 +1,8 @@
-# libpo32
+# libpo (formerly libpo32)
 
-Source: https://github.com/ericlewis/libpo32
+Source: https://github.com/ericlewis/libpo
+The pinned subset below was published under the former libpo32 name.
+
 Base revision: `3b3a0a758ba452fc809027c5bafcc5e2d0931532`
 Copyright (c) 2026 Eric Lewis. MIT, see LICENSE.
 

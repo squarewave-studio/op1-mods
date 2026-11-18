@@ -10,7 +10,7 @@ Building OP-1 screens? See the [OP-1 Design Kit](https://github.com/squarewave-s
 [![Watch the GIN demo on YouTube](https://img.youtube.com/vi/YZD0u1V243E/hqdefault.jpg)](https://www.youtube.com/watch?v=YZD0u1V243E)
 
 GIN turns the keyboard into a synth drum kit, based on the PO-32 Tonic's drum
-engine and built on Eric Lewis's [libpo32](https://github.com/ericlewis/libpo32).
+engine and built on Eric Lewis's [libpo](https://github.com/ericlewis/libpo).
 Every key is its own sound, and every sound is synthesised, not sampled.
 
 Each key holds two versions of its sound, A and B. Turn the blue encoder to
@@ -55,7 +55,7 @@ Orbital and Tape Archive have folders ready, with no releases yet.
 ## Licence And Credits
 
 GIN's synthesis core derives from Eric Lewis's MIT-licensed
-[libpo32](https://github.com/ericlewis/libpo32). The factory kits adapt eight
+[libpo](https://github.com/ericlewis/libpo). The factory kits adapt eight
 of [CNTR RNDM's free PO-32 kits](https://youtube.com/playlist?list=PLlkIAiu0_jPw3DgmZm1RbmFe86rzuWU2o).
 op1r is by pcppcp and contributors. Thanks to all of them.
 
