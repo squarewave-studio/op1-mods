@@ -33,11 +33,15 @@ of the hardware or a capture of GIN loaded through OP1P.*
 
 ### Where It's At
 
-GIN 1.0.0 is a source release for community firmware builders, tested on the
-original OP-1 with firmware #246. The reusable synthesis core is here, and the
-native instrument and build source are in the linked op1r fork. There's no
-loadable `gin.op1p` yet. That needs a drum synth adaptor for op1r, which I'm
-working on next.
+GIN 1.0.0 is a source-only release. It includes the reusable synthesis core,
+performance fixes and tests, with links to the original native editor,
+artwork and integration source. The OP-1 integration uses 44.1 kHz synthesis
+and four voices.
+
+Firmware maintainers handle native font rendering, packaging and testing for
+their host. This release contains no installable plugin or firmware image.
+
+[GIN 1.0.0 Source Release](https://github.com/squarewave-studio/op1-mods/releases/tag/gin/v1.0.0)
 
 [Get The Source](mods/gin/docs/BUILDERS.md) · [Read About GIN](mods/gin/README.md) · [Compatibility](mods/gin/docs/COMPATIBILITY.md)
 
@@ -57,7 +61,9 @@ Orbital and Tape Archive have folders ready, with no releases yet.
 GIN's synthesis core derives from Eric Lewis's MIT-licensed
 [libpo](https://github.com/ericlewis/libpo). The factory kits adapt eight
 of [CNTR RNDM's free PO-32 kits](https://youtube.com/playlist?list=PLlkIAiu0_jPw3DgmZm1RbmFe86rzuWU2o).
-op1r is by pcppcp and contributors. Thanks to all of them.
+op1r is by pcppcp and contributors. Hundekraft contributed the optional
+block-renderer optimisation, native resampling improvements and output-level
+matching with soft-knee limiting. Thanks to all of them.
 
 The [MIT licence](LICENSE) covers the original reusable code and
 documentation in this repository. Third-party work keeps its own terms. GPL

@@ -15,6 +15,14 @@ The Drum Synth API, loader and native adapters are part of a separate op1r
 contribution. A plugin built with GPL code is covered by the GPL, even though
 the synthesis core here is MIT.
 
+## Hundekraft
+
+[Hundekraft](https://github.com/Hundekraft/op1-workshop) contributed the optional
+block-renderer local-state optimisation, native resampler optimisations,
+output-level matching and host save fixes. The native host and plugin have
+GPL-3.0-or-later terms with the retained OP-1 firmware permission. The reusable
+synthesis core here remains MIT.
+
 ## libpo
 
 GIN's synthesis core derives from [libpo](https://github.com/ericlewis/libpo),
@@ -56,6 +64,6 @@ respective owners. No ownership of those names or endorsement is claimed.
 The credits and compatibility notes here don't give anyone the right to
 redistribute other companies' source, firmware, fonts, presets or other assets.
 
-This repository contains documentation, host previews and the reusable synthesis
-core. The linked native source has its own component notices. No installable
-plugin, stock firmware image or extracted font data is distributed here.
+This source release contains documentation, host previews and the reusable
+synthesis core. The linked native source has its own component notices.
+No installable plugin, stock firmware image or extracted font data is distributed.

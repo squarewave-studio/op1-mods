@@ -5,11 +5,14 @@
  * accumulated with40-bit native partial sums; no target C wide integer.
  * Sensitive pole settings retain the previous DF2T recurrence. Selection is
  * cached outside the sample loop and never changes within a prepared hit.
- * The host-only wide expression is an arithmetic oracle for the native kernel.
+ * The portable word arithmetic matches the wide sum without a128-bit type.
  * Included by gin_fixed_filter.h after the unchanged DF2T helpers.
  */
 #ifndef GIN_FIXED_FILTER_DF1_H
 #define GIN_FIXED_FILTER_DF1_H
+#if !defined(__bfin__) || defined(GIN_PORTABLE_ARITHMETIC)
+#include "gin_df1_portable.h"
+#endif
 /* Register-input dot product: preserves five C history operands. */
 static inline __attribute__((always_inline)) int32_t df1_register_dot(int32_t x,int32_t x1,int32_t x2,int32_t y1,int32_t y2,const gin_filter_coefficients_t *p){
 #if defined(__bfin__) && !defined(GIN_PORTABLE_ARITHMETIC)
@@ -51,9 +54,7 @@ static inline __attribute__((always_inline)) int32_t df1_register_dot(int32_t x,
   : "I1","L1","M1","A0","A1","ASTAT","memory");
  return result;
 #else
- int32_t values[5]={x,x1,x2,y1,y2};__int128 wide=0;
- for(unsigned j=0;j<5;j++){__int128 term=(__int128)values[j]*p->c[j].value;wide+=j<3?term:-term;}
- wide>>=30;return wide>INT32_MAX?INT32_MAX:wide<INT32_MIN?INT32_MIN:(int32_t)wide;
+ int overflow=0;return gin_df1_dot5(x,x1,x2,y1,y2,p,&overflow);
 #endif
 }
 #if defined(__bfin__) && !defined(GIN_PORTABLE_ARITHMETIC)
@@ -81,9 +82,7 @@ static int32_t df1_filter(int32_t input,const gin_filter_coefficients_t *p,gin_p
   sum=df1_dot5(values,p);
   overflow|=sum==INT32_MAX||sum==INT32_MIN;
 #else
-  __int128 wide=0;int32_t values[5]={x,x1,x2,y1,y2};
-  for(unsigned i=0;i<5;i++){__int128 term=(__int128)values[i]*p->c[i].value;wide+=i<3?term:-term;}
-  wide>>=30;overflow|=wide>INT32_MAX||wide<INT32_MIN;sum=wide>INT32_MAX?INT32_MAX:wide<INT32_MIN?INT32_MIN:(int32_t)wide;
+  sum=gin_df1_dot5(x,x1,x2,y1,y2,p,&overflow);
 #endif
 
   if(overflow&&bits>12){int ignored=0;x1=df1_scale(x1,bits,bits-4,&ignored);x2=df1_scale(x2,bits,bits-4,&ignored);y1=df1_scale(y1,bits,bits-4,&ignored);y2=df1_scale(y2,bits,bits-4,&ignored);bits-=4;
@@ -108,7 +107,7 @@ static inline __attribute__((always_inline)) int32_t df1_q28(int32_t input,const
 #if defined(__bfin__) && !defined(GIN_PORTABLE_ARITHMETIC)
   y=df1_dot5(values,p);
 #else
-  __int128 wide=0;for(unsigned i=0;i<5;i++){__int128 term=(__int128)values[i]*p->c[i].value;wide+=i<3?term:-term;}wide>>=30;y=wide>INT32_MAX?INT32_MAX:wide<INT32_MIN?INT32_MIN:(int32_t)wide;
+  int overflow=0;y=gin_df1_dot5(values[0],values[1],values[2],values[3],values[4],p,&overflow);
 #endif
   if(y!=INT32_MAX&&y!=INT32_MIN){
    z[1].hi=z[0].hi;z[0].hi=(uint32_t)x;z[1].lo=z[0].lo;z[0].lo=(uint32_t)y;
@@ -143,6 +142,7 @@ static GIN_FILTER_UNUSED int32_t eq_filter_compact(int32_t input,gin_integer_voi
 #undef GIN_FILTER_UNUSED
 #if GIN_BLOCK_STATE
 static __attribute__((noinline)) void gin_filter_block(int32_t *data,uint32_t count,const gin_filter_coefficients_t *p,gin_pair_t *z,uint32_t *fraction,uint32_t common){
+ if(common&GIN_NOISE_BOUNDED){for(uint32_t i=0;i<count;i++)data[i]=bounded_noise_q28(data[i],p,z,fraction,common);return;}
  if(!(common&2u)){for(uint32_t i=0;i<count;i++)data[i]=filter_q28(data[i],p,z,fraction,common);return;}
  uint32_t i=0;
  while(i<count){
