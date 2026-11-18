@@ -7,7 +7,7 @@ Synth drums on all 24 keys of the original OP-1, by [SquareWave Studio](https://
 [![Watch the GIN demo on YouTube](https://img.youtube.com/vi/YZD0u1V243E/hqdefault.jpg)](https://www.youtube.com/watch?v=YZD0u1V243E)
 
 GIN is a drum synth based on the PO-32 Tonic's drum engine, built on Eric
-Lewis's [libpo32](https://github.com/ericlewis/libpo32). Every key is its own
+Lewis's [libpo](https://github.com/ericlewis/libpo). Every key is its own
 sound, synthesised rather than sampled, so you can bend a kick or a hat into
 something new without ever loading a file.
 
@@ -100,7 +100,7 @@ with.
 ## Credits
 
 GIN is by SquareWave Studio. The synthesis core derives from Eric Lewis's
-MIT-licensed [libpo32](https://github.com/ericlewis/libpo32).
+MIT-licensed [libpo](https://github.com/ericlewis/libpo).
 Factory sounds adapt eight of [CNTR RNDM's free PO-32 kits](https://youtube.com/playlist?list=PLlkIAiu0_jPw3DgmZm1RbmFe86rzuWU2o).
 The original sounds are CNTR RNDM's; GIN adds the 24-key layout and variations.
 op1r is by pcppcp and contributors. See [component and licence notes](../../THIRD_PARTY.md).

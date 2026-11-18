@@ -1,7 +1,7 @@
 # GIN Synthesis Core
 
 Reusable C synthesis from GIN by SquareWave Studio, based on Eric Lewis's
-[libpo32](https://github.com/ericlewis/libpo32).
+[libpo](https://github.com/ericlewis/libpo).
 
 This folder contains the synthesis and preparation code. It is not an OP1P
 plugin or a firmware installer. The OP-1 instrument adds the native drum host,
@@ -27,7 +27,7 @@ rate conversion belongs to the host adapter.
 ## Licence
 
 MIT. Preserve the Eric Lewis and SquareWave Studio notices. The included
-libpo32 subset retains its licence and copyright. No op1r GPL host adapter,
+libpo PO-32 subset retains its licence and copyright. No op1r GPL host adapter,
 Teenage Engineering firmware or font data, Sonic Charge source or factory kits
 are included here.
 

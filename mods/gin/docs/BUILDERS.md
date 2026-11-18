@@ -7,7 +7,7 @@ all 25 target objects and the complete tested module with the pinned compiler.
 ## Get The Source
 
 - [Reusable synthesis core](../core/README.md): MIT-licensed synthesis,
-  preparation code, libpo32 subset and functional tests.
+  preparation code, libpo PO-32 subset and functional tests.
 - [Complete native source](https://github.com/joseph-holland/op1r-src/tree/ec5d6f722df05b77f80706db239352992937f4d7/synth_sdk/experimental/gin/standalone): the drum adapter,
   editor, eight 24-key factory kits, saved state, SDK inputs and build recipe.
 - [Integration guide](https://github.com/joseph-holland/op1r-src/tree/ec5d6f722df05b77f80706db239352992937f4d7/synth_sdk/experimental/gin/standalone/INTEGRATION.md) and
@@ -58,7 +58,7 @@ plugin, and it hasn't been accepted upstream.
 ## Credits
 
 GIN is by [SquareWave Studio](https://squarewave.studio). Its synthesis derives
-from Eric Lewis's MIT-licensed [libpo32](https://github.com/ericlewis/libpo32).
+from Eric Lewis's MIT-licensed [libpo](https://github.com/ericlewis/libpo).
 The factory sounds adapt CNTR RNDM's kits, with the source links and creator's
 published permission statement in the native source's `PRESET_CREDITS.json`.
 See [THIRD_PARTY.md](../../../THIRD_PARTY.md) for credits and trademark notices.
