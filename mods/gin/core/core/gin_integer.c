@@ -298,11 +298,13 @@ static int32_t eq_filter_compact(int32_t input,gin_integer_voice_t *v) {
     return filter(input,p,z);
 }
 #endif
+#if !(GIN_BLOCK_STATE && GIN_FAST_FIXED)
 static int32_t envelope(uint32_t n,uint32_t attack,int32_t seed,int32_t *state,gin_coefficient_t a,gin_coefficient_t d) {
     int32_t out;
     if(n==attack)*state=seed;
     out=*state; *state=apply(*state,n<attack?a:d); return out;
 }
+#endif
 static int32_t distort(int32_t x,const gin_prepared_t *p) {
     int32_t xc,term;
     const int32_t third=SIGNAL_ONE/3; /* compile-time division */
@@ -379,68 +381,87 @@ static __attribute__((noinline)) int gin_integer_render_block64(gin_integer_voic
  uint32_t nq=!((nf->c[1].fraction^30u)|(nf->c[2].fraction^30u)|(nf->c[3].fraction^30u)|(nf->c[4].fraction^30u));
  uint32_t eq=!((ef->c[1].fraction^30u)|(ef->c[2].fraction^30u)|(ef->c[3].fraction^30u)|(ef->c[4].fraction^30u));
  if(nq&&df1_eligible(nf))nq|=2u;if(eq&&df1_eligible(ef))eq|=2u;
+ /* Voice state and prepared constants live in locals for the block, so the
+  * stores to the voice no longer force every constant to be reloaded per
+  * sample. Same operations in the same order, so the same samples. */
+ uint32_t n=v->n,active=v->active,phase=v->phase,rnd=v->random,ring_phase=v->ring_phase;
+ int32_t osc_env=v->osc_env,noise_env=v->noise_env,mod_env=v->mod_env,mod_s=v->mod_s,mod_c=v->mod_c;
+ int32_t mod_state=v->mod_state,linear_env=v->linear_env;
+ const uint32_t total=p->total,wave=p->wave,mod_mode=p->mod_mode,noise_mode=p->noise_mode;
+ const uint32_t osc_attack=p->osc_attack,noise_attack=p->noise_attack,linear_attack=p->linear_attack,linear_end=p->linear_end;
+ const uint32_t phase_step=p->phase_step,ring_step=p->ring_step,ring_enabled=p->ring_enabled;
+ const int32_t pitch_scale=p->pitch_scale,osc_decay_seed=p->osc_decay_seed,noise_decay_seed=p->noise_decay_seed;
+ const int32_t linear_decay_seed=p->linear_decay_seed,linear_attack_step=p->linear_attack_step,linear_decay_step=p->linear_decay_step;
+ const gin_coefficient_t osc_attack_c=p->osc_attack_c,osc_decay_c=p->osc_decay_c,noise_attack_c=p->noise_attack_c,noise_decay_c=p->noise_decay_c;
+ const gin_coefficient_t mod_decay_c=p->mod_decay_c,rot_s=p->rot_s,rot_c=p->rot_c,alpha=p->alpha,one_minus_alpha=p->one_minus_alpha;
+ const gin_coefficient_t osc_gain=p->osc_gain;
+ const int32_t noise_gain_value=p->noise_gain.value;
+#define GIN_RANDOM() (rnd=rnd*1103515245u+12345u,(int32_t)(rnd&0x7fffffffu)-ONE)
  for(uint32_t i=0;i<frames;i++){
   int32_t oe,ne,mod,osc=0;
-  if(!v->active){out[i]=0;continue;}
-        if(p->osc_gain.value){
-        oe=envelope(v->n,p->osc_attack,p->osc_decay_seed,&v->osc_env,p->osc_attack_c,p->osc_decay_c);
-        if(!p->pitch_scale){
-            if(p->mod_mode==2u)(void)random_signal(v);
-            v->phase+=p->phase_step;
+  if(!active){out[i]=0;continue;}
+        if(osc_gain.value){
+        if(n==osc_attack)osc_env=osc_decay_seed;
+        oe=osc_env;osc_env=apply(osc_env,n<osc_attack?osc_attack_c:osc_decay_c);
+        if(!pitch_scale){
+            if(mod_mode==2u)(void)GIN_RANDOM();
+            phase+=phase_step;
         }else{
-        if(p->mod_mode==0u) {mod=v->mod_env;v->mod_env=apply(v->mod_env,p->mod_decay_c);}
-        else if(p->mod_mode==1u) {
-            int32_t ms=gin_add_sat(apply(v->mod_s,p->rot_c),apply(v->mod_c,p->rot_s));
-            int32_t mc=gin_sub_sat(apply(v->mod_c,p->rot_c),apply(v->mod_s,p->rot_s));
-            mod=gin_mul_shift(v->mod_s,v->mod_env,30);v->mod_s=ms;v->mod_c=mc;
-            v->mod_env=apply(v->mod_env,p->mod_decay_c);
+        if(mod_mode==0u) {mod=mod_env;mod_env=apply(mod_env,mod_decay_c);}
+        else if(mod_mode==1u) {
+            int32_t ms=gin_add_sat(apply(mod_s,rot_c),apply(mod_c,rot_s));
+            int32_t mc=gin_sub_sat(apply(mod_c,rot_c),apply(mod_s,rot_s));
+            mod=gin_mul_shift(mod_s,mod_env,30);mod_s=ms;mod_c=mc;
+            mod_env=apply(mod_env,mod_decay_c);
         } else {
-            v->mod_state=gin_add_sat(apply(v->mod_state,p->one_minus_alpha),apply(random_signal(v),p->alpha));mod=v->mod_state;
+            int32_t r=GIN_RANDOM();
+            mod_state=gin_add_sat(apply(mod_state,one_minus_alpha),apply(r,alpha));mod=mod_state;
         }
-        v->phase+=phase_product(p->phase_step,exp2_pitch(gin_mul_shift(mod,p->pitch_scale,30)));
+        phase+=phase_product(phase_step,exp2_pitch(gin_mul_shift(mod,pitch_scale,30)));
         }
-        if(p->wave==0u)osc=sine(v->phase);
-        else if(p->wave==1u)osc=(int32_t)(((uint32_t)absolute((int32_t)(v->phase>>1)-ONE)<<1)-(uint32_t)ONE);
-        else osc=(int32_t)(v->phase>>1)-ONE;
+        if(wave==0u)osc=sine(phase);
+        else if(wave==1u)osc=(int32_t)(((uint32_t)absolute((int32_t)(phase>>1)-ONE)<<1)-(uint32_t)ONE);
+        else osc=(int32_t)(phase>>1)-ONE;
         osc=gin_mul_shift(osc,oe,30)>>(30u-GIN_SIGNAL_BITS);
-        osc=apply(osc,p->osc_gain);
-        }else if(p->mod_mode==2u)(void)random_signal(v);
-        if(p->noise_gain.value){
-        if(p->noise_mode==2u) {
-            if(v->n<p->noise_attack)ne=ONE;
+        osc=apply(osc,osc_gain);
+        }else if(mod_mode==2u)(void)GIN_RANDOM();
+        if(noise_gain_value){
+        if(noise_mode==2u) {
+            if(n<noise_attack)ne=ONE;
             else {
-                int32_t decay=envelope(v->n,p->noise_attack,p->noise_decay_seed,&v->noise_env,p->noise_attack_c,p->noise_decay_c);
-                if(p->ring_enabled) {
-#if GIN_FAST_FIXED
+                int32_t decay;
+                if(n==noise_attack)noise_env=noise_decay_seed;
+                decay=noise_env;noise_env=apply(noise_env,n<noise_attack?noise_attack_c:noise_decay_c);
+                if(ring_enabled) {
                     int32_t tri;
                     /* Q32 turns: off-callback preparation supplies the first
                      * decay sample phase and increment. One wraparound add
                      * replaces the positive-binary32 rounding model. This
                      * deliberately approximates reference phase rounding. */
-                    tri=ONE-absolute((int32_t)(v->ring_phase>>1)-ONE);
-                    v->ring_phase+=p->ring_step;
-#else
-                    uint32_t time=gin_word_mul(gin_u32_word(v->n),p->time_inverse_word);
-                    uint32_t dt=gin_word_sub(time,p->noise_attack_word);
-                    int32_t tri;
-                    v->ring_phase=gin_word_fraction(gin_word_mul(dt,p->ring_inverse_word));
-                    tri=ONE-absolute((int32_t)(v->ring_phase>>1)-ONE);
-#endif
+                    tri=ONE-absolute((int32_t)(ring_phase>>1)-ONE);
+                    ring_phase+=ring_step;
                     ne=gin_mul_shift(sine(0x40000000u+((uint32_t)tri<<1)),decay,30);
                 } else ne=decay;
             }
-        } else if(p->noise_mode==1u) {
-            if(v->n==p->linear_attack)v->linear_env=p->linear_decay_seed;
-            if(v->n<p->linear_attack) {ne=v->linear_env;v->linear_env=gin_add_sat(v->linear_env,p->linear_attack_step);}
-            else if(v->n<p->linear_end) {ne=v->linear_env;v->linear_env=gin_sub_sat(v->linear_env,p->linear_decay_step);}
+        } else if(noise_mode==1u) {
+            if(n==linear_attack)linear_env=linear_decay_seed;
+            if(n<linear_attack) {ne=linear_env;linear_env=gin_add_sat(linear_env,linear_attack_step);}
+            else if(n<linear_end) {ne=linear_env;linear_env=gin_sub_sat(linear_env,linear_decay_step);}
             else ne=0;
-        } else ne=envelope(v->n,p->noise_attack,p->noise_decay_seed,&v->noise_env,p->noise_attack_c,p->noise_decay_c);
+        } else {
+            if(n==noise_attack)noise_env=noise_decay_seed;
+            ne=noise_env;noise_env=apply(noise_env,n<noise_attack?noise_attack_c:noise_decay_c);
+        }
 
-  raw[i]=random_signal(v)>>(30u-GIN_SIGNAL_BITS);weight[i]=ne;
-  }else {raw[i]=0;weight[i]=0;(void)random_signal(v);}
+  raw[i]=GIN_RANDOM()>>(30u-GIN_SIGNAL_BITS);weight[i]=ne;
+  }else {raw[i]=0;weight[i]=0;(void)GIN_RANDOM();}
   sig[i]=osc;count++;
-  if(++v->n>=p->total)v->active=0;
+  if(++n>=total)active=0;
  }
+#undef GIN_RANDOM
+ v->n=n;v->active=active;v->phase=phase;v->random=rnd;v->ring_phase=ring_phase;
+ v->osc_env=osc_env;v->noise_env=noise_env;v->mod_env=mod_env;v->mod_s=mod_s;v->mod_c=mod_c;
+ v->mod_state=mod_state;v->linear_env=linear_env;
  if(p->noise_gain.value){
   gin_filter_block(raw,count,nf,v->noise_z,&v->noise_compact,nq);
   for(uint32_t i=0;i<count;i++){
