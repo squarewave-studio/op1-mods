@@ -1,5 +1,5 @@
 /* Copyright (c) 2026 SquareWave Studio. MIT; see LICENSE.
- * libpo32-derived portions: Copyright (c) 2026 Eric Lewis. */
+ * libpo-derived portions: Copyright (c) 2026 Eric Lewis. */
 /* Derived synthesis structure: libpo32, Copyright (c) 2026 Eric Lewis, MIT.
  * See LICENSE in this directory. Owned fixed-point prototype; no native ABI. */
 #ifndef GIN_INTEGER_H
@@ -31,6 +31,13 @@
 #endif
 #if GIN_SINE_QUARTER != 0 && GIN_SINE_QUARTER != 1
 #error GIN_SINE_QUARTER_must_be_zero_or_one
+#endif
+/* Stable undamped sine pitch modulation, normalized each256absolute samples. */
+#ifndef GIN_SINE_NORMALIZE
+#define GIN_SINE_NORMALIZE 1
+#endif
+#if GIN_SINE_NORMALIZE != 0 && GIN_SINE_NORMALIZE != 1
+#error GIN_SINE_NORMALIZE_must_be_zero_or_one
 #endif
 #define GIN_INTEGER_RATE 44100u
 #define GIN_INTEGER_BLOCK 128u
@@ -101,6 +108,10 @@ int gin_integer_trigger(gin_integer_voice_t *,const gin_prepared_t *);
 int gin_integer_render_frames(gin_integer_voice_t *,int16_t *,uint32_t frames);
 int gin_integer_render64(gin_integer_voice_t *,int16_t *); /* exactly64 writes */
 int gin_integer_render(gin_integer_voice_t *,int16_t *); /* exactly128 writes */
+/* Pure sufficient test: all future core PCM of this immutable hit is exactly
+ * zero. Does not inspect/flush reconstruction history or change voice state.
+ * False includes uncertain/quiet/ringing tails, not merely audible voices. */
+int gin_integer_can_retire(const gin_integer_voice_t *);
 void gin_integer_release(gin_integer_voice_t *);
 uint32_t gin_integer_status(const gin_integer_voice_t *);
 #endif

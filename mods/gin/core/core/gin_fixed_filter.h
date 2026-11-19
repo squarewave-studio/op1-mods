@@ -1,5 +1,5 @@
 /* Copyright (c) 2026 SquareWave Studio. MIT; see LICENSE.
- * libpo32-derived portions: Copyright (c) 2026 Eric Lewis. */
+ * libpo-derived portions: Copyright (c) 2026 Eric Lewis. */
 /* Owned32-bit adaptive fixed-point filter state. Derived recurrence follows
  * libpo32, Eric Lewis2026, MIT; see LICENSE. Coefficients remain unchanged.
  * Q28 normally, bounded same-sample retries Q24/Q20/Q16/Q12 for headroom.
@@ -95,7 +95,41 @@ static int32_t filter_q28(int32_t input,const gin_filter_coefficients_t *p,gin_p
     uint32_t magnitude=gin_magnitude(y);int32_t result=(int32_t)((magnitude+128u)>>8);
     return y<0?-result:result;
 }
-static int32_t original_noise_filter(int32_t input,gin_integer_voice_t *v,uint32_t common){return filter_q28(input,&v->p.noise_filter,v->noise_z,&v->noise_compact,common);}
+/* RNG samples enter before the noise envelope/gain: Q20 in[-2^20,2^20-1].
+ * With Q28 x and Q30 coefficients, every feed-forward product is bounded by
+ * 2^29, including INT32_MIN coefficients. It cannot hit a saturation endpoint.
+ * |a2|<ONE similarly makes its product strictly interior for every signed32 y.
+ * All other feedback/update checks remain, with unchanged pre-sample retries.
+ * Cache format/zero/equality decisions once per block, never in voice state. */
+typedef char gin_noise_guard_requires_q20[(GIN_SIGNAL_BITS==20u)?1:-1];
+enum { GIN_NOISE_BOUNDED=4u, GIN_NOISE_B1_ZERO=8u, GIN_NOISE_B2_EQUALS_B0=16u };
+static uint32_t noise_guard_flags(const gin_filter_coefficients_t *p,uint32_t common){
+    if(common!=1u||p->c[0].fraction!=30u||p->c[4].value<=-ONE||p->c[4].value>=ONE)return common;
+    return common|GIN_NOISE_BOUNDED|
+        (p->c[1].value==0?GIN_NOISE_B1_ZERO:0u)|
+        (p->c[2].value==p->c[0].value?GIN_NOISE_B2_EQUALS_B0:0u);
+}
+/* Private entry: bounded RNG input and a GIN_NOISE_BOUNDED format ticket.
+ * EQ and post-gain/ring signals must never use this specialization. */
+static int32_t bounded_noise_q28(int32_t input,const gin_filter_coefficients_t *p,gin_pair_t *z,uint32_t *fraction,uint32_t flags){
+    if(*fraction!=28u)return filter_q28(input,p,z,fraction,flags);
+    int32_t x=input*256;
+    int32_t b0=gin_mul_shift(x,p->c[0].value,30u),y=gin_add_sat(b0,(int32_t)z[0].lo);
+    int32_t b1=(flags&GIN_NOISE_B1_ZERO)?0:gin_mul_shift(x,p->c[1].value,30u);
+    int32_t a1=gin_mul_shift(y,p->c[3].value,30u);
+    int32_t b2=(flags&GIN_NOISE_B2_EQUALS_B0)?b0:gin_mul_shift(x,p->c[2].value,30u);
+    int32_t a2=gin_mul_shift(y,p->c[4].value,30u);
+    int32_t t=gin_sub_sat(b1,a1),s0=gin_add_sat(t,(int32_t)z[1].lo),u=gin_sub_sat(b2,a2);
+    if(endpoint(y)||endpoint(a1)||endpoint(t)||endpoint(s0)||endpoint(u))return adaptive_filter(input,p,z,fraction);
+    z[0].lo=(uint32_t)s0;z[1].lo=(uint32_t)u;
+#if defined(GIN_APPROX_METRICS)
+    if(28u<gin_approx_min_fraction)gin_approx_min_fraction=28u;
+    uint32_t m=gin_magnitude(s0);if(m>gin_approx_peak_state)gin_approx_peak_state=m;
+    m=gin_magnitude(u);if(m>gin_approx_peak_state)gin_approx_peak_state=m;
+#endif
+    uint32_t magnitude=gin_magnitude(y);int32_t out=(int32_t)((magnitude+128u)>>8);return y<0?-out:out;
+}
+static int32_t original_noise_filter(int32_t input,gin_integer_voice_t *v,uint32_t common){if(common&GIN_NOISE_BOUNDED)return bounded_noise_q28(input,&v->p.noise_filter,v->noise_z,&v->noise_compact,common);return filter_q28(input,&v->p.noise_filter,v->noise_z,&v->noise_compact,common);}
 static int32_t original_eq_filter_compact(int32_t input,gin_integer_voice_t *v,uint32_t common){return filter_q28(input,&v->p.eq_filter,v->eq_z,&v->eq_compact,common);}
 #include "gin_fixed_filter_df1.h"
 #endif

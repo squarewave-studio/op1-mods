@@ -16,13 +16,22 @@ make test
 ```
 
 The functional test uses address and undefined-behaviour sanitizers. It checks
-arithmetic, output bounds, retrigger/release and independent voice state. It is
-a host test, not an OP-1 performance measurement.
+arithmetic, output bounds, retrigger/release, independent voice state, mixed
+block lengths, exact guarded-filter arithmetic and long sine modulation. Both
+rounding profiles and block settings are covered. These are host tests, not
+OP-1 performance measurements.
 
 `GIN_FAST_FIXED=1` selects the fast fixed-point profile used by GIN. Its Q30
 multiply uses floor rounding. The default precise profile retains its separate
 nearest-rounding behaviour. Both profiles use 44.1 kHz synthesis; native output
 rate conversion belongs to the host adapter.
+
+`GIN_BLOCK_STATE=1` enables the optional block renderer. The original OP-1
+integration profile uses the scalar renderer (`GIN_BLOCK_STATE=0`).
+
+`gin_integer_can_retire()` reports a sufficient condition for all future core
+samples of an immutable hit to be exactly zero. A host must still drain its
+resampler and fades before retiring a voice.
 
 ## Licence
 

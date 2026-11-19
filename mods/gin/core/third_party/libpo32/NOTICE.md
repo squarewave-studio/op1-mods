@@ -15,3 +15,7 @@ Sine, exp2 and log2 lookup entries have been checked against the corresponding
 mathematical functions at float32 precision. GIN's integer tables quantise the
 sine and exp2 values, and its drive table is generated from the documented
 fixed-point shaping expression.
+
+The sine pitch-modulation rotor normalisation is ported from libpo commit
+[7ecdd694](https://github.com/ericlewis/libpo/commit/7ecdd694f5032d906dd99ad3fe397a7a8d939e69).
+The original subset pin is retained; this is a targeted later correction.

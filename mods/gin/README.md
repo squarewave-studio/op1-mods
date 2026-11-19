@@ -48,9 +48,9 @@ across the keyboard and added variations.
 
 ## Screens
 
-Rendered from the screen code with the original OP-1 font, matching the build
-tested on hardware. They aren't photos of the hardware, emulator captures or
-proof of OP1P loader support. Extracted font data isn't distributed here.
+These host renders illustrate the original native UI, using the OP-1 font
+loaded locally. They are not hardware photos or captures of a packaged plugin.
+Font data is not included in this source release.
 
 ### Tone Envelope
 
@@ -74,28 +74,21 @@ proof of OP1P loader support. Extracted font data isn't distributed here.
 
 ## Version 1.0.0
 
-GIN 1.0.0 is a source release for community firmware builders. The
-standalone build is tested on the original OP-1 with firmware #246.
-[Get the core, native source and build instructions](docs/BUILDERS.md).
-There's no loadable `gin.op1p` yet.
+GIN 1.0.0 is a source-only release of the reusable synthesis core, with links
+to the original native instrument source. The OP-1 integration uses 44.1 kHz
+synthesis and four voices. There is no FAST mode in the v1 profile.
 
-GIN keeps to four voices. Very dense patterns can still break up when a lot
-else on the OP-1 is running at the same time.
+[GIN 1.0.0 Source Release](https://github.com/squarewave-studio/op1-mods/releases/tag/gin/v1.0.0)
+· [Source And Build Instructions](docs/BUILDERS.md)
+
+Native font rendering, host integration, packaging and hardware testing belong
+to the firmware build. This release has no `.knl`, `.op1p` or complete firmware
+download. Use the firmware maintainer's instructions for their Gin package.
+
+Very dense patterns can still break up when a lot else on the OP-1 is running
+at the same time.
 
 [Controls And Saving](docs/CONTROLS.md) · [Compatibility](docs/COMPATIBILITY.md) · [Release Notes](CHANGELOG.md)
-
-## Coming To op1r As A Plugin
-
-The standalone build and the plugin are different packages. op1r's current
-drum path is built for the sample-based Drum+ engine, so a separate drum
-synth like GIN needs new shared host support in op1r. I'm working on that
-next.
-
-The plugin will keep the same sound, editor and saved state. `gin.op1p` will
-be offered once it passes its own loader, switching, saving and
-missing-plugin recovery tests. Installing a different firmware doesn't mean
-GIN will run on it. Each release will list the host versions it was tested
-with.
 
 ## Credits
 
@@ -103,7 +96,17 @@ GIN is by SquareWave Studio. The synthesis core derives from Eric Lewis's
 MIT-licensed [libpo](https://github.com/ericlewis/libpo).
 Factory sounds adapt eight of [CNTR RNDM's free PO-32 kits](https://youtube.com/playlist?list=PLlkIAiu0_jPw3DgmZm1RbmFe86rzuWU2o).
 The original sounds are CNTR RNDM's; GIN adds the 24-key layout and variations.
-op1r is by pcppcp and contributors. See [component and licence notes](../../THIRD_PARTY.md).
+op1r is by pcppcp and contributors. Hundekraft contributed the optional
+block-renderer optimisation, native resampling improvements and output-level
+matching with soft-knee limiting. See [component and licence notes](../../THIRD_PARTY.md).
+
+If GIN has been useful, please consider
+[supporting Eric Lewis on GitHub Sponsors](https://github.com/sponsors/ericlewis).
+
+Thanks to [Teenage Engineering](https://teenage.engineering/) for making excellent
+hardware and to [Sonic Charge](https://soniccharge.com/microtonic) for the original
+Microtonic drum synth. Support Sonic Charge by
+[buying Microtonic](https://soniccharge.onfastspring.com/microtonic).
 
 GIN is not affiliated with, authorised by, sponsored by or endorsed by Teenage
 Engineering AB or Sonic Charge / NuEdge Development AB. All trademarks remain

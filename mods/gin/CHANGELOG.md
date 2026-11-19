@@ -1,6 +1,26 @@
 # Release Notes
 
-## 1.0.0 Source Release
+## 1.0.0
+
+Source-only release of the reusable synthesis core, with links to the
+original native editor, artwork, kits and integration source. The OP-1
+integration profile stays at 44.1 kHz and four voices, without FAST mode.
+
+Guarded-noise arithmetic does less work. A new retirement predicate identifies
+immutable voice states whose future core samples are exactly zero. Host
+adapters still need to drain their resampler and fades before retiring a voice.
+
+Long sine pitch modulation is stabilised using Eric Lewis's libpo correction.
+Hundekraft contributed the optional block-renderer local-state optimisation.
+The core tests cover both rounding profiles and block settings, mixed block
+lengths, retrigger/release, filter equivalence and long sine modulation.
+
+Documentation links to libpo under its current name and credits Hundekraft's
+separate native resampling, output-level matching and host save improvements.
+Native packaging and font rendering remain with each firmware integration.
+No installable plugins, firmware images or extracted font data are included.
+
+## Earlier Standalone Source
 
 GIN for the original OP-1 #246: 24-key kits, four synthesis voices, per-sound
 A/B morphing, the full Advanced editor and individual sound names.
@@ -10,8 +30,7 @@ creator credit. Working-slot edits survive restart, and holding a snapshot
 button saves a separate named preset.
 
 Saving no longer crashes: GIN now avoids a temporary database journal that the
-stock filesystem can't open. If you tried an earlier test build, please use this
-one instead.
+stock filesystem can't open. The fix is recorded in the linked standalone source.
 
 Known limitation: very heavy combined load can still cause audio breakup, so
 GIN stays at four voices. OP1P support and op1r integration aren't part of this
