@@ -65,6 +65,14 @@ op1r is by pcppcp and contributors. Hundekraft contributed the optional
 block-renderer optimisation, native resampling improvements and output-level
 matching with soft-knee limiting. Thanks to all of them.
 
+If GIN has been useful, please consider
+[supporting Eric Lewis on GitHub Sponsors](https://github.com/sponsors/ericlewis).
+
+Thanks to [Teenage Engineering](https://teenage.engineering/) for making excellent
+hardware and to [Sonic Charge](https://soniccharge.com/microtonic) for the original
+Microtonic drum synth. Support Sonic Charge by
+[buying Microtonic](https://soniccharge.onfastspring.com/microtonic).
+
 The [MIT licence](LICENSE) covers the original reusable code and
 documentation in this repository. Third-party work keeps its own terms. GPL
 host adapters and loader changes are kept separately in the op1r

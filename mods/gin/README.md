@@ -100,6 +100,14 @@ op1r is by pcppcp and contributors. Hundekraft contributed the optional
 block-renderer optimisation, native resampling improvements and output-level
 matching with soft-knee limiting. See [component and licence notes](../../THIRD_PARTY.md).
 
+If GIN has been useful, please consider
+[supporting Eric Lewis on GitHub Sponsors](https://github.com/sponsors/ericlewis).
+
+Thanks to [Teenage Engineering](https://teenage.engineering/) for making excellent
+hardware and to [Sonic Charge](https://soniccharge.com/microtonic) for the original
+Microtonic drum synth. Support Sonic Charge by
+[buying Microtonic](https://soniccharge.onfastspring.com/microtonic).
+
 GIN is not affiliated with, authorised by, sponsored by or endorsed by Teenage
 Engineering AB or Sonic Charge / NuEdge Development AB. All trademarks remain
 their owners' property. [Ownership and source-publication notes](../../THIRD_PARTY.md#independence-and-trademarks).
