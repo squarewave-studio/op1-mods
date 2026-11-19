@@ -46,6 +46,18 @@ GIN comes with eight factory kits adapted from
 Each one fills all 24 keys. The original sounds are his. I've laid them out
 across the keyboard and added variations.
 
+## Convert Your Own Kits
+
+Use the free [Gin Kit Converter](https://squarewave.studio/gin/#converter) to
+import a PO-32 data-transfer WAV or Microtonic `.mtdrum` and `.mtpreset` files,
+including Patternarium presets. Combine kits, preview sounds and choose the A/B
+morph endpoints across up to 24 slots. Slots can be left empty.
+
+Download the Gin `.aif` preset and follow the
+[OP-1 loading instructions](https://squarewave.studio/gin/#gin-install).
+Conversion happens locally in your browser. Your original OP-1 needs compatible
+custom firmware with Gin already installed; the preset does not install the engine.
+
 ## Screens
 
 These host renders illustrate the original native UI, using the OP-1 font

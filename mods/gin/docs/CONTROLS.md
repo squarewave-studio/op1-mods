@@ -45,3 +45,16 @@ does not create or overwrite a named preset.
 
 If SAVE RETRY appears, the edit remains pending. Wait for the save to complete
 before switching off. GIN does not claim power-loss-proof storage.
+
+## Convert Your Own Kits
+
+The free [Gin Kit Converter](https://squarewave.studio/gin/#converter) imports
+PO-32 data-transfer WAV recordings, Microtonic `.mtdrum` sounds and `.mtpreset`
+kits, including Patternarium presets. Preview and arrange sounds, set the A/B
+morph endpoints and download a Gin `.aif` preset.
+
+On an original OP-1 with Gin installed in compatible custom firmware, copy the
+preset to `OP-1/drum/GIN/` in USB Disk mode, safely eject the device and load the
+kit from the drum preset browser. See the
+[USB and preset-loading instructions](https://squarewave.studio/gin/#gin-install)
+for the steps. The downloaded preset does not install firmware or the Gin engine.
