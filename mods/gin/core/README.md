@@ -26,8 +26,14 @@ multiply uses floor rounding. The default precise profile retains its separate
 nearest-rounding behaviour. Both profiles use 44.1 kHz synthesis; native output
 rate conversion belongs to the host adapter.
 
-`GIN_BLOCK_STATE=1` enables the optional block renderer. The original OP-1
-integration profile uses the scalar renderer (`GIN_BLOCK_STATE=0`).
+The optional block renderer requires both `GIN_BLOCK_STATE=1` and
+`GIN_FAST_FIXED=1`. Setting `GIN_BLOCK_STATE=1` with the precise profile
+(`GIN_FAST_FIXED=0`) still uses the scalar renderer.
+
+In the fast profile, scalar/block equivalence refers to PCM output. Dormant
+component state can differ at block boundaries, so matching PCM does not imply
+identical full voice state. The original OP-1 integration profile uses the
+scalar renderer (`GIN_BLOCK_STATE=0`).
 
 `gin_integer_can_retire()` reports a sufficient condition for all future core
 samples of an immutable hit to be exactly zero. A host must still drain its

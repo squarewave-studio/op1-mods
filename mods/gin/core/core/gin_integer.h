@@ -10,7 +10,9 @@
 #ifndef GIN_FAST_FIXED
 #define GIN_FAST_FIXED 0
 #endif
-/* Optional exact block-state staging. Default preserves scalar rendering. */
+/* Optional block renderer: requires both GIN_BLOCK_STATE=1 and GIN_FAST_FIXED=1.
+ * Fast scalar/block equivalence refers to PCM output; dormant component state
+ * can differ at block boundaries. Default preserves scalar rendering. */
 #ifndef GIN_BLOCK_STATE
 #define GIN_BLOCK_STATE 0
 #endif
