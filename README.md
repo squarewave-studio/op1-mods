@@ -31,6 +31,17 @@ laid out across all 24 keys.
 *Rendered from the screen code with the original OP-1 font. It isn't a photo
 of the hardware or a capture of GIN loaded through OP1P.*
 
+### Convert Your Own Kits
+
+[Convert Your Own Kits](https://squarewave.studio/gin/#converter) with the free
+Gin kit converter. Import a PO-32 data-transfer WAV or Microtonic `.mtdrum` and
+`.mtpreset` files, preview and arrange the sounds, then download a Gin `.aif`
+preset. Files are processed locally in your browser.
+
+The preset needs compatible custom firmware with Gin already installed on the
+original OP-1. Follow the [OP-1 loading instructions](https://squarewave.studio/gin/#gin-install)
+to copy it to your device.
+
 ### Where It's At
 
 GIN 1.0.0 is a source-only release. It includes the reusable synthesis core,
