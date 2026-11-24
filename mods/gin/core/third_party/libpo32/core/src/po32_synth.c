@@ -93,10 +93,19 @@ static float lut_sqrtf(float x) {
 #define SYNTH_TWO_THIRDS (2.0f / 3.0f)
 
 
-#define SYNTH_MOD_ENV_PERIOD_THRESH_S   1.5e-3f
-#define SYNTH_MOD_ENV_PERIOD_SCALE_SLOW 2.0f
-#define SYNTH_MOD_ENV_PERIOD_SCALE_FAST 8.0f
-#define SYNTH_MOD_ENV_FAST_GAIN_NUM     0.5f
+/* Mod noise envelope, measured reference behaviour.
+ * During the attack the envelope retriggers N times at equal spacing; each
+ * burst starts at unity and falls 24 dB (a factor of 16) by the next one.
+ * After the attack it decays exactly like Exp. N depends only on the
+ * normalised attack: N = floor(A * e^(B * NEnvAtk) + C), at least 2.
+ * Burst k starts on the first sample n with n * N >= k * L, L being the
+ * attack length in samples, so the float voice and the integer preview
+ * retrigger on the same samples. */
+#define SYNTH_MOD_BURST_COUNT_A   0.3769
+#define SYNTH_MOD_BURST_COUNT_B   5.5842
+#define SYNTH_MOD_BURST_COUNT_C   1.9714
+#define SYNTH_MOD_BURST_MIN_COUNT 2u
+#define SYNTH_MOD_BURST_DROP      (1.0f / 16.0f)
 
 #define SYNTH_LEVEL_MIN_PARAM 1.0e-4f
 #define SYNTH_GAIN_SILENCE_DB (-500.0f)
@@ -171,6 +180,39 @@ static float synth_attack_time(float x) {
 
 static float synth_decay_time(float x) {
   return synth_param_exp_range(x, SYNTH_DECAY_MIN_SECONDS, SYNTH_DECAY_MAX_SECONDS);
+}
+
+/* e^x for 0 <= x <= 6 to double precision: x = k ln2 + r with |r| <= ln2/2,
+ * then a Taylor series. The table exp is too coarse to place N exactly at
+ * its thresholds. */
+static double synth_exp_precise(double x) {
+  int k = (int)(x * 1.4426950408889634 + 0.5), i;
+  double r = x - (double)k * 0.6931471805599453, term = 1.0, sum = 1.0;
+  for (i = 1; i <= 14; ++i) {
+    term *= r / (double)i;
+    sum += term;
+  }
+  while (k-- > 0)
+    sum *= 2.0;
+  return sum;
+}
+
+static uint32_t synth_mod_burst_count(float atk_param) {
+  double p = atk_param < 0.0f ? 0.0 : (atk_param > 1.0f ? 1.0 : (double)atk_param);
+  uint32_t n = (uint32_t)(SYNTH_MOD_BURST_COUNT_A * synth_exp_precise(SYNTH_MOD_BURST_COUNT_B * p) +
+                          SYNTH_MOD_BURST_COUNT_C);
+  return n < SYNTH_MOD_BURST_MIN_COUNT ? SYNTH_MOD_BURST_MIN_COUNT : n;
+}
+
+/* The first sample index n with (float)n * inv_sr >= t: the render loop's
+ * own test for leaving an attack of t seconds. */
+static uint32_t synth_first_sample_at(float t, float inv_sr, float sr) {
+  uint32_t n = (uint32_t)(t * sr);
+  while ((float)n * inv_sr < t)
+    ++n;
+  while (n && (float)(n - 1u) * inv_sr >= t)
+    --n;
+  return n;
 }
 
 static float synth_exp_decay_env(float t, float decay_time) {
@@ -554,22 +596,19 @@ void po32_synth_voice_init(po32_synth_voice_t *v, uint32_t sample_rate,
   v->mod_dcy_coeff = v->mod_is_exp ? po32_param_mod_decay_coefficient(mod_rate, inv_sr) : 1.0f;
   po32_lut_rot_step(LUT_TWO_PI * mod_rate_hz * inv_sr, &v->mod_rot_s, &v->mod_rot_c);
 
+  /* Mod: N bursts over an attack of L samples, each falling by
+   * nenv_atk_coeff per sample (1/16 over L/N samples); the decay is Exp's.
+   * Integer sample counts only, so no reciprocal of a tiny attack. */
   v->mod_env_amp_correction = 1.0f;
-  if (v->nenv_is_ring) {
-    float dcy_param = params->NEnvDcy;
-    if (dcy_param > SYNTH_LEVEL_MIN_PARAM) {
-      v->mod_env_period = (dcy_param / sr) * lut_powf(SYNTH_FILTER_Q_MAX, dcy_param);
-      if (v->mod_env_period < SYNTH_MOD_ENV_PERIOD_THRESH_S) {
-        v->mod_env_period *= SYNTH_MOD_ENV_PERIOD_SCALE_FAST;
-        v->mod_env_amp_correction = lut_sqrtf(SYNTH_MOD_ENV_FAST_GAIN_NUM / v->mod_env_period);
-      } else {
-        v->mod_env_period *= SYNTH_MOD_ENV_PERIOD_SCALE_SLOW;
-      }
-    }
+  v->mod_attack_samples = 0u;
+  v->mod_burst_count = 0u;
+  if (v->nenv_is_ring && v->n_atk > 0.0f) {
+    v->mod_attack_samples = synth_first_sample_at(v->n_atk, inv_sr, sr);
+    v->mod_burst_count = synth_mod_burst_count(params->NEnvAtk);
+    if (v->mod_attack_samples > 0u)
+      v->nenv_atk_coeff = lut_powf(SYNTH_MOD_BURST_DROP,
+                                   (float)v->mod_burst_count / (float)v->mod_attack_samples);
   }
-
-  /* Must come after mod_env_period is computed above. */
-  v->inv_mod_env_period = (v->mod_env_period > 0.0f) ? (1.0f / v->mod_env_period) : 0.0f;
 
   po32_synth_voice_reset(v);
 }
@@ -700,24 +739,21 @@ po32_status_t po32_synth_voice_render_f32(po32_synth_voice_t *v, float *out, siz
 
     /* n_dcy is always > 0 (synth_decay_time returns >= SYNTH_DECAY_MIN_SECONDS). */
     if (v->nenv_is_ring) {
-      if (t < v->n_atk) {
-        noise_env = 1.0f;
+      uint64_t at = (uint64_t)(v->samples_rendered + i);
+      if (at < v->mod_attack_samples) {
+        /* A burst starts where at * N crosses a multiple of L. */
+        uint64_t L = v->mod_attack_samples, cross = at * v->mod_burst_count;
+        if (at == 0u || cross / L != (cross - v->mod_burst_count) / L)
+          v->nenv_v = 1.0f;
+        noise_env = v->nenv_v;
+        v->nenv_v *= v->nenv_atk_coeff;
       } else {
-        float dt = t - v->n_atk;
-        float decay;
         if (!v->nenv_synced) {
-          v->nenv_v = synth_exp_decay_env(dt, v->n_dcy);
+          v->nenv_v = synth_exp_decay_env(t - v->n_atk, v->n_dcy);
           v->nenv_synced = 1;
         }
-        decay = v->nenv_v;
+        noise_env = v->nenv_v;
         v->nenv_v *= v->nenv_dcy_coeff;
-        if (v->mod_env_period > 0.0f) {
-          float saw = synth_wrap_phase01(dt * v->inv_mod_env_period);
-          float tri = 1.0f - 2.0f * synth_fabsf(saw - 0.5f);
-          noise_env = lut_cosf(LUT_PI * tri) * decay * v->mod_env_amp_correction;
-        } else {
-          noise_env = decay;
-        }
       }
     } else if (v->nenv_is_linear) {
       if (t < v->lin_atk)

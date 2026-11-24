@@ -63,7 +63,7 @@ typedef struct {
     uint32_t magic,total,wave,mod_mode,noise_mode,use_eq,use_dist;
     uint32_t osc_attack,noise_attack,linear_attack,linear_end;
     uint32_t phase_step,ring_phase,ring_step,ring_enabled;
-    uint32_t time_inverse_word,noise_attack_word,ring_inverse_word;
+    uint32_t reserved[3]; /* Retain the prepared layout without Q32 ring fields. */
     int32_t pitch_scale; /* Q24 octaves. */
     int32_t osc_decay_seed,noise_decay_seed,linear_decay_seed;
     int32_t linear_attack_step,linear_decay_step; /* Q30. */

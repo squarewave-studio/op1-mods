@@ -8,7 +8,8 @@ Copyright (c) 2026 Eric Lewis. MIT, see LICENSE.
 
 This subset contains synthesis headers, the voice renderer and lookup-table
 math. The GIN version includes parameter-mapping and EQ interoperability
-changes. It does not contain the transfer modem, manufacturer firmware or a
+changes, plus a Mod noise envelope based on measured reference behaviour.
+It does not contain the transfer modem, manufacturer firmware or a
 proprietary SDK.
 
 Sine, exp2 and log2 lookup entries have been checked against the corresponding

@@ -369,6 +369,8 @@ int gin_integer_trigger(gin_integer_voice_t *v,const gin_prepared_t *p) {
 #endif
     v->active=1;v->random=123456789u;v->osc_env=v->noise_env=1073742;
     v->mod_env=ONE;v->ring_phase=p->ring_phase;
+    /* Mod opens on a burst at unity; Exp and Linear seed their own attack. */
+    if(p->noise_mode==2u)v->noise_env=ONE;
     /* Match the corrected reference trigger phase and deterministic hold seed. */
     if(p->mod_mode==1u)v->mod_s=ONE;else v->mod_c=ONE;
     if(p->mod_mode==2u)v->mod_state=random_signal(v);
@@ -415,7 +417,7 @@ uint32_t gin_integer_status(const gin_integer_voice_t *v) {return v&&v->active?v
 static __attribute__((noinline)) int gin_integer_render_block64(gin_integer_voice_t *v,int16_t *out,uint32_t frames){
 
  int32_t sig[64],raw[64],weight[64];
- const gin_prepared_t *p=&v->p;uint32_t count=0,start=v->n;
+ const gin_prepared_t *p=&v->p;uint32_t count=0;
  const gin_filter_coefficients_t *nf=&p->noise_filter,*ef=&p->eq_filter;
  uint32_t nq=!((nf->c[1].fraction^30u)|(nf->c[2].fraction^30u)|(nf->c[3].fraction^30u)|(nf->c[4].fraction^30u));
  uint32_t eq=!((ef->c[1].fraction^30u)|(ef->c[2].fraction^30u)|(ef->c[3].fraction^30u)|(ef->c[4].fraction^30u));
@@ -475,18 +477,11 @@ static __attribute__((noinline)) int gin_integer_render_block64(gin_integer_voic
         }else if(mod_mode==2u)(void)GIN_RANDOM();
         if(noise_live){
         if(noise_mode==2u) {
-            if(n<noise_attack)ne=ONE;
-            else {
-                int32_t decay;
-                if(n==noise_attack)noise_env=noise_decay_seed;
-                decay=noise_env;noise_env=apply(noise_env,n<noise_attack?noise_attack_c:noise_decay_c);
-                if(ring_enabled) {
-                    int32_t tri;
-                    tri=ONE-absolute((int32_t)(ring_phase>>1)-ONE);
-                    ring_phase+=ring_step;
-                    ne=gin_mul_shift(sine(0x40000000u+((uint32_t)tri<<1)),decay,30);
-                } else ne=decay;
-            }
+            /* Mod: bursts that each fall 24 dB, retriggered where n * N passes
+             * a multiple of the attack length, then the Exp decay. */
+            if(n==noise_attack)noise_env=noise_decay_seed;
+            ne=noise_env;noise_env=apply(noise_env,n<noise_attack?noise_attack_c:noise_decay_c);
+            if(ring_enabled&&n<noise_attack){ring_phase+=ring_step;if(ring_phase>=noise_attack){ring_phase-=noise_attack;noise_env=ONE;}}
         } else if(noise_mode==1u) {
             if(n==linear_attack)linear_env=linear_decay_seed;
             if(n<linear_attack) {ne=linear_env;linear_env=gin_add_sat(linear_env,linear_attack_step);}
@@ -510,7 +505,6 @@ static __attribute__((noinline)) int gin_integer_render_block64(gin_integer_voic
   gin_filter_block(raw,count,nf,v->noise_z,&v->noise_compact,nq);
   for(uint32_t i=0;i<count;i++){
    int32_t noise=gin_mul_shift(raw[i],weight[i],30);
-   if(p->noise_mode==2u&&start+i>=p->noise_attack)noise=apply(noise,p->ring_gain);
    if(!noise_unity)noise=apply(noise,p->noise_gain);sig[i]=gin_add_sat(sig[i],noise);
   }
  }
@@ -610,27 +604,11 @@ int gin_integer_render_frames(gin_integer_voice_t *v,int16_t *out,uint32_t frame
         }else if(p->mod_mode==2u)(void)random_signal(v);
         if(control&2u){
         if(p->noise_mode==2u) {
-            if(v->n<p->noise_attack)ne=ONE;
-            else {
-                int32_t decay=envelope(v->n,p->noise_attack,p->noise_decay_seed,&v->noise_env,p->noise_attack_c,p->noise_decay_c);
-                if(p->ring_enabled) {
-#if GIN_FAST_FIXED
-                    int32_t tri;
-                    /* Q32 turns: off-callback preparation supplies the first
-                     * decay sample phase and increment. One wraparound add
-                     * replaces the positive-binary32 rounding model. This
-                     * deliberately approximates reference phase rounding. */
-                    tri=ONE-absolute((int32_t)(v->ring_phase>>1)-ONE);
-                    v->ring_phase+=p->ring_step;
-#else
-                    uint32_t time=gin_word_mul(gin_u32_word(v->n),p->time_inverse_word);
-                    uint32_t dt=gin_word_sub(time,p->noise_attack_word);
-                    int32_t tri;
-                    v->ring_phase=gin_word_fraction(gin_word_mul(dt,p->ring_inverse_word));
-                    tri=ONE-absolute((int32_t)(v->ring_phase>>1)-ONE);
-#endif
-                    ne=gin_mul_shift(sine(0x40000000u+((uint32_t)tri<<1)),decay,30);
-                } else ne=decay;
+            /* Mod: as the block renderer above. */
+            ne=envelope(v->n,p->noise_attack,p->noise_decay_seed,&v->noise_env,p->noise_attack_c,p->noise_decay_c);
+            if(p->ring_enabled&&v->n<p->noise_attack){
+                v->ring_phase+=p->ring_step;
+                if(v->ring_phase>=p->noise_attack){v->ring_phase-=p->noise_attack;v->noise_env=ONE;}
             }
         } else if(p->noise_mode==1u) {
             if(v->n==p->linear_attack)v->linear_env=p->linear_decay_seed;
@@ -644,7 +622,6 @@ int gin_integer_render_frames(gin_integer_voice_t *v,int16_t *out,uint32_t frame
         noise=noise_filter(random_signal(v)>>(30u-GIN_SIGNAL_BITS),v);
 #endif
         noise=gin_mul_shift(noise,ne,30);
-        if(p->noise_mode==2u&&v->n>=p->noise_attack)noise=apply(noise,p->ring_gain);
         if(!(control&16u))noise=apply(noise,p->noise_gain);
         }else (void)random_signal(v);
         sample=gin_add_sat(osc,noise);

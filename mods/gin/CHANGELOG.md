@@ -1,5 +1,12 @@
 # Release Notes
 
+## Unreleased
+
+The Mod noise envelope follows measured reference behaviour: bursts during the
+attack, each falling by a factor of 16 before restarting, followed by Exp decay.
+Float and integer voices use the same sample-index schedule. Integer rendering
+uses conditional subtraction without callback division or modulo.
+
 ## 1.0.0
 
 Source-only release of the reusable synthesis core, with links to the
