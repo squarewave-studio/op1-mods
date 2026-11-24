@@ -60,6 +60,11 @@ needs matching preparation data, voice layouts and adapter code when adopting
 core changes. The linked standalone source is not a packaged build of this
 release.
 
+The Mod envelope update changes prepared coefficients and the meaning of its
+burst counters. Regenerate precomputed prepared voices and factory dictionaries
+with the matching preparation code when adopting it. Saved normalised patch
+parameters and GNS1 kit data are unchanged.
+
 | Host | Source And Packaging |
 | --- | --- |
 | Original OP-1, standalone #246 | Original native implementation and build recipe linked above |
