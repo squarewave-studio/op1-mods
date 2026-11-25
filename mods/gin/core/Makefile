@@ -6,6 +6,7 @@ SOURCES = core/gin_integer.c core/gin_precision.c core/gin_prepare.c core/tonic_
 test: out/functional
 	./out/functional
 	python3 tests/check.py
+	python3 tests/mod_envelope.py
 out/functional: $(SOURCES) tests/functional.c $(wildcard core/*.h) $(wildcard third_party/libpo32/core/include/*.h) $(wildcard third_party/libpo32/core/src/*.h)
 	mkdir -p out
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(SOURCES) tests/functional.c -lm -o $@

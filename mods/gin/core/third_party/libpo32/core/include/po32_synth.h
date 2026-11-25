@@ -85,7 +85,8 @@ typedef struct po32_synth_voice {
   float mod_dcy_coeff, mod_rot_s, mod_rot_c;
   float mod_alpha_precomp, mod_one_minus_alpha;
   float lin_atk, lin_dcy, inv_lin_atk, inv_lin_dcy;
-  float mod_env_period, inv_mod_env_period, mod_env_amp_correction;
+  uint32_t mod_attack_samples, mod_burst_count; /* Mod: attack length and bursts */
+  float mod_env_amp_correction;
   float dist_amt, level;
   float osc_gain_mix, noise_gain_mix;
   float osc_vel_g, noise_vel_g;

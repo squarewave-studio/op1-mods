@@ -20,18 +20,13 @@ static uint32_t first(float t,float inv) {
     while(n&&(float)(n-1u)*inv>=t)--n;
     return n;
 }
-static uint32_t phase(float turns) {
-    double x=(double)turns; x-=(double)(int32_t)x;if(x<0)x+=1;
-    return (uint32_t)(x*4294967296.0);
-}
 static float root(float x) {
     union {float f;uint32_t u;} v;float y,half=x*0.5f;
     v.f=x;v.u=0x5F375A86u-(v.u>>1);y=v.f;
     y=y*(1.5f-half*y*y);y=y*(1.5f-half*y*y);return x*y;
 }
-static uint32_t word(float x) {union{float f;uint32_t u;}v;v.f=x;return v.u;}
 int gin_integer_prepare(gin_prepared_t *out,const po32_patch_params_t *params,int velocity,float duration) {
-    tonic_voice_t ref;gin_prepared_t p;float drive,dt;unsigned i;
+    tonic_voice_t ref;gin_prepared_t p;float drive;unsigned i;
     if(!out||!params)return -1;
     tonic_voice_reset(&ref);
     if(tonic_voice_trigger(&ref,params,velocity,44100u,duration)!=PO32_OK)return -1;
@@ -59,15 +54,16 @@ int gin_integer_prepare(gin_prepared_t *out,const po32_patch_params_t *params,in
     p.rot_s=coefficient(ref.dsp.mod_rot_s);p.rot_c=coefficient(ref.dsp.mod_rot_c);
     p.alpha=coefficient(ref.dsp.mod_alpha_precomp);p.one_minus_alpha=coefficient(ref.dsp.mod_one_minus_alpha);
     p.ring_gain=coefficient(ref.dsp.mod_env_amp_correction);
-    if(ref.dsp.mod_env_period>0) {
-        volatile float rounded_time=(float)p.noise_attack*ref.dsp.inv_sr;
+    /* Mod: the float voice's own schedule. ring_step is the burst count N and
+     * ring_phase counts n * N modulo the attack length L, so a burst starts on
+     * exactly the samples the float voice retriggers on. The callback wraps by
+     * one subtraction, so the step never exceeds L: N > L happens only for a
+     * one-sample attack, where step L (zero phase) restarts every sample just
+     * as N does. */
+    if(p.noise_mode==2u&&ref.dsp.mod_attack_samples>0u) {
+        p.noise_attack=ref.dsp.mod_attack_samples;
         p.ring_enabled=1;
-        dt=rounded_time-ref.dsp.n_atk;
-        p.ring_phase=phase(dt*ref.dsp.inv_mod_env_period);
-        p.ring_step=phase(ref.dsp.inv_sr*ref.dsp.inv_mod_env_period);
-        p.time_inverse_word=word(ref.dsp.inv_sr);
-        p.noise_attack_word=word(ref.dsp.n_atk);
-        p.ring_inverse_word=word(ref.dsp.inv_mod_env_period);
+        p.ring_step=ref.dsp.mod_burst_count<p.noise_attack?ref.dsp.mod_burst_count:p.noise_attack;
     }
     p.osc_gain=coefficient(ref.dsp.osc_gain_mix*ref.dsp.osc_vel_g);
     p.noise_gain=coefficient(ref.dsp.noise_gain_mix*ref.dsp.noise_vel_g);
