@@ -1,11 +1,20 @@
 # Release Notes
 
-## Unreleased
+## 1.0.1 — 25 November 2026
 
 The Mod noise envelope follows measured reference behaviour: bursts during the
 attack, each falling by a factor of 16 before restarting, followed by Exp decay.
 Float and integer voices use the same sample-index schedule. Integer rendering
 uses conditional subtraction without callback division or modulo.
+
+Saved normalised parameters and GNS1 kit data keep their formats. Sounds using
+the corrected Mod noise-envelope mode can change audibly; Exp and Linear modes
+and oscillator reset phase are unchanged. The OP-1 profile remains 44.1 kHz
+and four voices. Firmware builders must regenerate prepared voices and factory
+dictionaries with the matching preparation code.
+
+This remains a source-only release. Native credits and packaging are maintained
+by each host integration, separately from this core.
 
 ## 1.0.0
 

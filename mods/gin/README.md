@@ -72,13 +72,24 @@ Font data is not included in this source release.
 
 ![GIN credits](docs/screenshots/about.png)
 
-## Version 1.0.0
+## Convert Your Own Kits
 
-GIN 1.0.0 is a source-only release of the reusable synthesis core, with links
+Use the [Gin kit converter](https://squarewave.studio/gin/) to convert your own
+PO-32 transfers or Microtonic patches. The page explains how to arrange the
+sounds and install the resulting preset on compatible Gin-enabled firmware.
+The core source alone is not a firmware installer.
+
+## Version 1.0.1
+
+GIN 1.0.1 is a source-only release of the reusable synthesis core, with links
 to the original native instrument source. The OP-1 integration uses 44.1 kHz
 synthesis and four voices. There is no FAST mode in the v1 profile.
 
-[GIN 1.0.0 Source Release](https://github.com/squarewave-studio/op1-mods/releases/tag/gin/v1.0.0)
+Version 1.0.1 corrects Mod noise-envelope bursts. Mod sounds can change audibly;
+Exp/Linear envelopes and oscillator reset phase are unchanged. Saved patch
+formats are unchanged. Builders must regenerate prepared coefficient data.
+
+[GIN 1.0.1 Source Release](https://github.com/squarewave-studio/op1-mods/releases/tag/gin/v1.0.1)
 · [Source And Build Instructions](docs/BUILDERS.md)
 
 Native font rendering, host integration, packaging and hardware testing belong
