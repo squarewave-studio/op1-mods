@@ -2,7 +2,7 @@
 
 ## Source Release
 
-GIN 1.0.0 supplies the reusable synthesis core and links to the original native
+GIN 1.0.1 supplies the reusable synthesis core and links to the original native
 instrument source for the original OP-1. The integration profile uses 44.1 kHz
 synthesis and four voices.
 
@@ -10,11 +10,20 @@ This release has no `.knl`, `.op1p` or firmware image. Firmware maintainers
 provide their own packages, native font rendering and host testing. Use their
 instructions and supported-version list for the package you install.
 
+## Updating From 1.0.0
+
+Saved normalised parameters and GNS1 kit data keep their formats. The Mod
+noise-envelope correction can change the sound of existing Mod patches; this
+is the intended envelope correction. Exp and Linear modes and oscillator
+reset phase are unchanged. Prepared coefficients are internal build data:
+regenerate bootstrap voices and factory dictionaries with matching preparation
+code, rather than reusing generated data from 1.0.0.
+
 ## Original Native Implementation
 
 The linked standalone source targets original OP-1 firmware #246. Its
 [source and build instructions](BUILDERS.md) remain available. That pinned
-implementation predates the core updates in v1.0.0; it is not a packaged build
+implementation predates the core updates in v1.0.1; it is not a packaged build
 of this release. Memory, hooks, preparation data and voice layouts need to
 match the host integration.
 

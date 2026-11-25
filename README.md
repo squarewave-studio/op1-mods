@@ -33,21 +33,21 @@ of the hardware or a capture of GIN loaded through OP1P.*
 
 ### Where It's At
 
-GIN 1.0.0 is a source-only release. It includes the reusable synthesis core,
+GIN 1.0.1 is a source-only release. It includes the reusable synthesis core,
 performance fixes and tests, with links to the original native editor,
 artwork and integration source. The OP-1 integration uses 44.1 kHz synthesis
-and four voices.
+and four voices. Version 1.0.1 corrects the Mod noise-envelope burst schedule.
 
 Firmware maintainers handle native font rendering, packaging and testing for
 their host. This release contains no installable plugin or firmware image.
 
-[GIN 1.0.0 Source Release](https://github.com/squarewave-studio/op1-mods/releases/tag/gin/v1.0.0)
+[GIN 1.0.1 Source Release](https://github.com/squarewave-studio/op1-mods/releases/tag/gin/v1.0.1)
 
-[Get The Source](mods/gin/docs/BUILDERS.md) · [Read About GIN](mods/gin/README.md) · [Compatibility](mods/gin/docs/COMPATIBILITY.md)
+[Convert Your Own Kits](https://squarewave.studio/gin/) · [Get The Source](mods/gin/docs/BUILDERS.md) · [Read About GIN](mods/gin/README.md) · [Compatibility](mods/gin/docs/COMPATIBILITY.md)
 
 ## More Mods On The Way
 
-Each mod gets its own folder, docs and release tags. GIN uses `gin/v1.0.0`.
+Each mod gets its own folder, docs and release tags. GIN uses `gin/v1.0.1`.
 Orbital and Tape Archive have folders ready, with no releases yet.
 
 | Folder | Mod |
@@ -86,7 +86,7 @@ to their respective owners. See the [ownership and source-publication notes](THI
 
 ## Support My Open Source Work
 
-These mods are free. If one has been useful, you can leave a thank-you tip. It
+These mods are free. If one has been useful, you can [leave a thank-you tip](https://squarewave.studio/tip/). It
 doesn't unlock anything. It just helps me keep building them.
 
 - [Buy me a coffee ($5)](https://buy.squarewave.studio/checkout/buy/880667af-df68-45e1-b8e5-e36c2b5de26e)

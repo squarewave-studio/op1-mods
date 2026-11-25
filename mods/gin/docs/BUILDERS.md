@@ -1,10 +1,14 @@
 # GIN For Firmware Builders
 
-GIN 1.0.0 is a source-only release for the original OP-1. The reusable core
+GIN 1.0.1 is a source-only release for the original OP-1. The reusable core
 is included here; the original native instrument source is linked separately.
 Firmware maintainers supply and test their own host integration and packages.
 
-## Version 1.0.0 Core
+## Version 1.0.1 Core
+
+Version 1.0.1 corrects the Mod noise envelope: repeated attack bursts followed
+by Exp decay. Mod sounds can change audibly. Exp/Linear modes and oscillator
+reset phase retain their previous behaviour. See [the release notes](../CHANGELOG.md).
 
 The core includes guarded-filter optimisations, an exact-silence retirement
 predicate, stable sine pitch modulation and Hundekraft's optional block-renderer
